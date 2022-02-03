@@ -28,3 +28,15 @@ Betty is a web app to manage your betting bankroll.
 - [ ] Merge bankrolls
 - [ ] Share a bankroll
 - [ ] Calculator
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
