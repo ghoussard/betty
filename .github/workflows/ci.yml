@@ -31,6 +31,9 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
+    - name: Build
+      run: yarn build
+
     - name: Run lint
       run: yarn lint
 
@@ -42,6 +45,3 @@ jobs:
 
     - name: Run end to end tests
       run: yarn e2e:headless
-
-    - name: Build
-      run: yarn build
