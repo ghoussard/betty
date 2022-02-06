@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import HelloWorld from '../front/components/HelloWorld'
 import { NextPage } from 'next'
+import Head from 'next/head'
+import { HelloWorld } from '@/front/components'
 
 const Home: NextPage = () => {
   return (
