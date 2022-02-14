@@ -1,18 +1,11 @@
 import { NextPage } from 'next'
-import Head from 'next/head'
 import { HelloWorld } from '@/front/components'
+import Link from 'next/link'
 
 const Home: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Betty</title>
-        <meta
-          name="description"
-          content="A web app to manage your betting bankroll"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Link href={'/bankroll/create'}>Create bankroll</Link>
       <HelloWorld />
     </>
   )
