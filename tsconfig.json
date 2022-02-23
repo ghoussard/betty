@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/back/*": ["src/back/*"],
+      "@/common/*": ["src/common/*"],
       "@/front/*": ["src/front/*"],
       "@/pages/*": ["src/pages/*"],
       "@/styles/*": ["src/styles/*"],
