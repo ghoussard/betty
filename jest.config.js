@@ -8,7 +8,6 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/back/(.*)$': '<rootDir>/src/back/$1',
-    '^@/common/(.*)$': '<rootDir>/src/common/$1',
     '^@/front/(.*)$': '<rootDir>/src/front/$1',
   },
   testPathIgnorePatterns: [
