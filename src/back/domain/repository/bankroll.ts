@@ -1,7 +1,7 @@
-import {Bankroll} from '@/back/domain'
+import { Bankroll } from '@/back/domain'
 
 type BankrollRepository = {
-    create: (bankroll: Bankroll) => Promise<void>
+  create: (bankroll: Bankroll) => Promise<void>
 }
 
-export type {BankrollRepository}
+export type { BankrollRepository }

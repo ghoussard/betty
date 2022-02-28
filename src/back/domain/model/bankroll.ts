@@ -1,7 +1,7 @@
 type BankrollIdentifier = string
 
 type Bankroll = {
-  uuid: BankrollIdentifier,
+  uuid: BankrollIdentifier
   name: string
 }
 
