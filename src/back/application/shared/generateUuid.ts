@@ -1,4 +1,4 @@
-import {BankrollIdentifier} from '@/back/domain'
+import { BankrollIdentifier } from '@/back/domain'
 
 type GenerateUuid = () => BankrollIdentifier
 

@@ -13,9 +13,9 @@ const handler = async (
   }
 
   await handleCreateBankroll(
-    bankrollRepository, 
-    generateUuid, 
-    createBankrollCommand,
+    bankrollRepository,
+    generateUuid,
+    createBankrollCommand
   )
 
   res.send()
