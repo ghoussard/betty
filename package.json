@@ -10,7 +10,7 @@
     "prettier": "prettier --config .prettierrc.json --check src cypress __tests__",
     "prettier:fix": "prettier --config .prettierrc.json --write src cypress __tests__",
     "test:back:unit": "TEST_SUITE=unit-back jest",
-    "test:back:integration": "firebase emulators:exec --only firestore --project test 'TEST_SUITE=integration-back jest'",
+    "test:back:integration": "firebase emulators:exec --only firestore --project test 'TEST_SUITE=integration-back jest --detectOpenHandles'",
     "test:front": "TEST_SUITE=front jest",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
