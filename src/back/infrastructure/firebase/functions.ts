@@ -61,18 +61,40 @@ const createDocument = async (
   await addDoc(collectionReference, document)
 }
 
+// TODO: Fix it
+// const getDocument = async (
+//   collectionName: CollectionName,
+//   documentId: DocumentId
+// ): Promise<unknown> => {
+//   const documentReference = getDocumentReference(collectionName, documentId)
+//   const documentSnapshot = await getDoc(documentReference)
+
+//   if (!documentSnapshot.exists()) {
+//     throw new DocumentNotFound()
+//   }
+
+//   return documentSnapshot.data()
+// }
+
 const getDocument = async (
   collectionName: CollectionName,
   documentId: DocumentId
 ): Promise<unknown> => {
-  const documentReference = getDocumentReference(collectionName, documentId)
-  const documentSnapshot = await getDoc(documentReference)
+  const collectionReference = getCollectionReference(collectionName)
+  const documents = await getDocs(collectionReference)
 
-  if (!documentSnapshot.exists()) {
+  const document = documents.docs
+    .map(
+      (documentSnapshot: DocumentSnapshot): Document =>
+        documentSnapshot.data() as Document
+    )
+    .filter((document: Document) => document.id === documentId)
+
+  if (0 === document.length) {
     throw new DocumentNotFound()
   }
 
-  return documentSnapshot.data()
+  return document[0]
 }
 
 const upsertDocument = async (

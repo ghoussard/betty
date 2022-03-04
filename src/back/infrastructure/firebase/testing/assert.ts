@@ -7,6 +7,7 @@ const assertDocumentExists = async (
   try {
     void (await getDocument(collectionName, documentId))
   } catch (e) {
+    console.log(e)
     return false
   }
 
