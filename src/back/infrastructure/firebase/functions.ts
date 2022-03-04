@@ -5,7 +5,6 @@ import {
   CollectionReference,
   DocumentReference,
   DocumentData,
-  getDoc,
   doc,
   setDoc,
   deleteDoc,
