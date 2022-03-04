@@ -81,7 +81,7 @@ const upsertDocument = async (
   document: PartialDocument
 ): Promise<void> => {
   const documentReference = getDocumentReference(collectionName, documentId)
-  void (await setDoc(documentReference, document))
+  await setDoc(documentReference, document)
 }
 
 const deleteDocument = async (
@@ -89,7 +89,7 @@ const deleteDocument = async (
   documentId: DocumentId
 ): Promise<void> => {
   const documentReference = getDocumentReference(collectionName, documentId)
-  void (await deleteDoc(documentReference))
+  await deleteDoc(documentReference)
 }
 
 const clearCollection = async (
@@ -104,20 +104,20 @@ const clearCollection = async (
     batch.delete(document.ref)
   })
 
-  void (await batch.commit())
+  await batch.commit()
 }
 
 const clearCollections = async (
   collectionNames: CollectionName[]
 ): Promise<void> => {
   collectionNames.forEach(async (collectionName: CollectionName) => {
-    void (await clearCollection(collectionName))
+    await clearCollection(collectionName)
   })
 }
 
 const clearAllCollections = async (): Promise<void> => {
   collectionNames.forEach(async (collectionName: CollectionName) => {
-    void (await clearCollection(collectionName))
+    await clearCollection(collectionName)
   })
 }
 
