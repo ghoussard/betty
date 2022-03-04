@@ -1,10 +1,22 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
-import { getFirebaseOptions } from '@/back/infrastructure/environments'
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
+import {
+  getFirebaseOptions,
+  getFirebaseUseEmulator,
+  getFirebaseEmulatorHost,
+  getFirebaseEmulatorPort,
+} from '@/back/infrastructure/environments'
 
-const firebaseOptions = getFirebaseOptions()
-const app = initializeApp(firebaseOptions)
+const app = initializeApp(getFirebaseOptions())
 
 const firestore = getFirestore(app)
+
+if (getFirebaseUseEmulator()) {
+  connectFirestoreEmulator(
+    firestore,
+    getFirebaseEmulatorHost(),
+    getFirebaseEmulatorPort()
+  )
+}
 
 export { firestore }

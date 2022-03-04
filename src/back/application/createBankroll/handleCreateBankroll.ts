@@ -1,24 +1,23 @@
-import { Bankroll, BankrollRepository } from '@/back/domain'
+import {
+  Bankroll,
+  BankrollRepository,
+  CreateBankrollCommand,
+} from '@/back/domain'
 import { GenerateUuid } from '@/back/application'
-
-type CreateBankrollCommand = {
-  name: string
-}
 
 const handleCreateBankroll = async (
   { create }: BankrollRepository,
   generateUuid: GenerateUuid,
-  createBankrollCommand: CreateBankrollCommand
+  { name }: CreateBankrollCommand
 ): Promise<void> => {
   const uuid = generateUuid()
 
   const bankroll: Bankroll = {
     uuid,
-    name: createBankrollCommand.name,
+    name,
   }
 
   await create(bankroll)
 }
 
-export type { CreateBankrollCommand }
 export { handleCreateBankroll }

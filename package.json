@@ -9,12 +9,13 @@
     "lint:fix": "next lint --dir src --fix",
     "prettier": "prettier --config .prettierrc.json --check src cypress __tests__",
     "prettier:fix": "prettier --config .prettierrc.json --write src cypress __tests__",
-    "unit": "jest",
-    "unit:watch": "jest --watch",
+    "test:back:unit": "TEST_SUITE=unit-back jest",
+    "test:back:integration": "firebase emulators:exec --only firestore --project test 'TEST_SUITE=integration-back jest'",
+    "test:front": "TEST_SUITE=front jest",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test start http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless"
+    "e2e": "firebase emulators:exec --only firestore --project e2e 'start-server-and-test start http://localhost:3000 cypress'",
+    "e2e:headless": "firebase emulators:exec --only firestore --project e2e 'start-server-and-test start http://localhost:3000 cypress:headless'"
   },
   "dependencies": {
     "firebase": "^9.6.7",
