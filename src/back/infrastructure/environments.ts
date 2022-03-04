@@ -10,7 +10,7 @@ const getFirebaseEmulatorPort = (): number =>
 const getFirebaseOptions = (): FirebaseOptions => {
   if (getFirebaseUseEmulator()) {
     return {
-      projectId: env.FIREBASE_EMULATOR_PROJECT_ID ?? '',
+      projectId: env.FIREBASE_PROJECT_ID ?? '',
     }
   }
 

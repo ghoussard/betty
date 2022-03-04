@@ -27,7 +27,12 @@ switch (env.TEST_SUITE) {
     break
   case 'integration-back':
     customJestConfig.testMatch = ['<rootDir>/__tests__/back/integration/**/*.test.ts']
-    customJestConfig.setupFilesAfterEnv = [...customJestConfig.setupFilesAfterEnv, '<rootDir>/jest/setupFirebaseEmulator.js']
+    customJestConfig.setupFilesAfterEnv = [
+      ...customJestConfig.setupFilesAfterEnv,
+      '<rootDir>/jest/setupFirebaseEmulator.js',
+      '<rootDir>/jest/tearDownFirebaseEmulator.js'
+    ]
+    customJestConfig.testEnvironment = 'node'
     break
   case 'front':
     customJestConfig.testMatch = ['<rootDir>/__tests__/front/**/*.test.ts(x)']
