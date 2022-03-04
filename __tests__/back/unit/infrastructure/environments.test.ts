@@ -40,7 +40,7 @@ describe('environments', () => {
 
   test('it returns firebase options when use emulator is true', () => {
     setEnvVar('FIREBASE_USE_EMULATOR', '1')
-    setEnvVar('FIREBASE_EMULATOR_PROJECT_ID', 'betty-test')
+    setEnvVar('FIREBASE_PROJECT_ID', 'betty-test')
 
     expect(getFirebaseUseEmulator()).toBe(true)
     expect(getFirebaseOptions()).toEqual({

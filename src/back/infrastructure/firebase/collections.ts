@@ -1,8 +1,8 @@
-const BANKROLL_COLLECTION = 'bankrolls'
+const BANKROLL_COLLECTION_NAME = 'bankrolls'
 
-const collections = [BANKROLL_COLLECTION] as const
+const collectionNames = [BANKROLL_COLLECTION_NAME] as const
 
-type Collection = typeof collections[number]
+type CollectionName = typeof collectionNames[number]
 
-export type { Collection }
-export { BANKROLL_COLLECTION }
+export type { CollectionName }
+export { collectionNames, BANKROLL_COLLECTION_NAME }

@@ -1,11 +1,18 @@
 import {
-  addDocument,
-  BANKROLL_COLLECTION,
-} from '@/back/infrastructure/firebase'
+  createDocument,
+  Document,
+  BANKROLL_COLLECTION_NAME,
+} from '@/back/infrastructure'
 import { Bankroll, BankrollRepository } from '@/back/domain'
 
-const create = async (bankroll: Bankroll): Promise<void> =>
-  void (await addDocument(BANKROLL_COLLECTION, bankroll))
+const create = async (bankroll: Bankroll): Promise<void> => {
+  const bankrollDocument: Document = {
+    id: bankroll.uuid,
+    ...bankroll,
+  }
+
+  await createDocument(BANKROLL_COLLECTION_NAME, bankrollDocument)
+}
 
 const bankrollRepository: BankrollRepository = {
   create,
