@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { CreateBankrollCommand, handleCreateBankroll } from '@/back/application'
+import { CreateBankrollCommand } from '@/back/domain'
+import { handleCreateBankroll } from '@/back/application'
 import { bankrollRepository, generateUuid } from '@/back/infrastructure'
 
 const handler = async (
