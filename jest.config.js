@@ -6,37 +6,38 @@ const createJestConfig = nextJest({
 })
 
 const customJestConfig = {
-  testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/back/(.*)$': '<rootDir>/src/back/$1',
     '^@/front/(.*)$': '<rootDir>/src/front/$1',
   },
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/', 
-    '<rootDir>/.next/',
-    '<rootDir>/cypress/',
+  testMatch: [
+    '<rootDir>/__tests__/**/*.test.ts',
   ],
-  setupFilesAfterEnv: [
-    '@testing-library/jest-dom/extend-expect',
-  ]
 }
 
 switch (env.TEST_SUITE) {
   case 'unit-back':
+    customJestConfig.testEnvironment = 'node'
     customJestConfig.testMatch = ['<rootDir>/__tests__/back/unit/**/*.test.ts']
     break
   case 'integration-back':
+    customJestConfig.testEnvironment = 'node'
     customJestConfig.testMatch = ['<rootDir>/__tests__/back/integration/**/*.test.ts']
     customJestConfig.setupFilesAfterEnv = [
-      ...customJestConfig.setupFilesAfterEnv,
       '<rootDir>/jest/setupFirebaseEmulator.js',
-      '<rootDir>/jest/tearDownFirebaseEmulator.js'
+      '<rootDir>/jest/tearDownFirebaseEmulator.js',
+      '<rootDir>/jest/extendExpect.ts',
     ]
-    customJestConfig.testEnvironment = 'node'
     break
   case 'front':
+    customJestConfig.testEnvironment = 'jest-environment-jsdom'
     customJestConfig.testMatch = ['<rootDir>/__tests__/front/**/*.test.ts(x)']
+    customJestConfig.setupFilesAfterEnv = [
+      '@testing-library/jest-dom/extend-expect',
+    ]
     break
+  default:
+    throw new Error ('Please specify a valid value in TEST_SUITE environment variable')
 }
 
 module.exports = createJestConfig(customJestConfig)

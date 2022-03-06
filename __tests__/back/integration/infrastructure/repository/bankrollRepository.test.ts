@@ -1,5 +1,5 @@
 import { Bankroll } from '@/back/domain'
-import { bankrollRepository, assertDocumentExists } from '@/back/infrastructure'
+import { bankrollRepository } from '@/back/infrastructure'
 
 describe('bankroll repository', () => {
   test('it creates a bankroll', async () => {
@@ -9,10 +9,6 @@ describe('bankroll repository', () => {
     }
 
     await bankrollRepository.create(bankroll)
-    const bankrollDocumentExists = await assertDocumentExists(
-      'bankrolls',
-      'an_uuid'
-    )
-    expect(bankrollDocumentExists).toBe(true)
+    await expect(bankroll).toBeSaved('bankrolls', 'uuid')
   })
 })

@@ -1,21 +1,18 @@
+import { addDoc } from 'firebase/firestore'
+import { Bankroll, BankrollRepository } from '@/back/domain'
 import {
-  createDocument,
-  Document,
+  getCollectionReference,
   BANKROLL_COLLECTION_NAME,
 } from '@/back/infrastructure'
-import { Bankroll, BankrollRepository } from '@/back/domain'
-
-const create = async (bankroll: Bankroll): Promise<void> => {
-  const bankrollDocument: Document = {
-    id: bankroll.uuid,
-    ...bankroll,
-  }
-
-  await createDocument(BANKROLL_COLLECTION_NAME, bankrollDocument)
-}
 
 const bankrollRepository: BankrollRepository = {
-  create,
+  async create(bankroll: Bankroll): Promise<void> {
+    const bankrollCollectionReference = getCollectionReference(
+      BANKROLL_COLLECTION_NAME
+    )
+
+    await addDoc(bankrollCollectionReference, bankroll)
+  },
 }
 
 export { bankrollRepository }

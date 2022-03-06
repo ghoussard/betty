@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import { initializeApp, deleteApp } from 'firebase/app'
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 import {
   getFirebaseOptions,
@@ -19,4 +19,6 @@ if (getFirebaseUseEmulator()) {
   )
 }
 
-export { firestore }
+const deleteFirebaseApp = (): Promise<void> => deleteApp(app)
+
+export { firestore, deleteFirebaseApp }
