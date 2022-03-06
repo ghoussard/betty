@@ -1,5 +1,7 @@
 type CreateBankrollCommand = {
-  name: string
+  name: string,
+  capital: number,
+  currency: string,
 }
 
 export type { CreateBankrollCommand }
