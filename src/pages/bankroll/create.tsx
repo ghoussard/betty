@@ -1,11 +1,27 @@
 import { NextPage } from 'next'
-import Link from 'next/link'
+import Router from 'next/router'
+import { Title } from '@/front/shared'
+import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
 const CreateBankroll: NextPage = () => {
+  const handleFormSubmitted = async (formValues: CreateBankrollFormValues) => {
+    const response = await fetch('/api/bankroll/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formValues),
+    })
+
+    if (response.ok) {
+      Router.push('/')
+    }
+  }
+
   return (
     <>
-      <Link href={'/'}>Go back</Link>
-      <div>Create Bankroll</div>
+      <Title>Create bankroll</Title>
+      <CreateBankrollForm onSubmit={handleFormSubmitted} />
     </>
   )
 }

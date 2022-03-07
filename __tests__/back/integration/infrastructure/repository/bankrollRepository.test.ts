@@ -6,7 +6,7 @@ describe('bankroll repository', () => {
     const bankroll: Bankroll = {
       uuid: 'an_uuid',
       name: 'My bankroll',
-      capital: 100,
+      initialCapital: 100,
       currency: 'EUR',
     }
 

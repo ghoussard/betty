@@ -1,12 +1,11 @@
 import { NextPage } from 'next'
-import { HelloWorld } from '@/front/components'
-import Link from 'next/link'
+import { Link, Title } from '@/front/shared'
 
 const Home: NextPage = () => {
   return (
     <>
+      <Title>Betty</Title>
       <Link href={'/bankroll/create'}>Create bankroll</Link>
-      <HelloWorld />
     </>
   )
 }

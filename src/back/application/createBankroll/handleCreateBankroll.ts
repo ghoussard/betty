@@ -8,15 +8,15 @@ import { GenerateUuid } from '@/back/application'
 const handleCreateBankroll = async (
   { create }: BankrollRepository,
   generateUuid: GenerateUuid,
-  { name, capital, currency }: CreateBankrollCommand
+  { name, initialCapital, currency }: CreateBankrollCommand
 ): Promise<void> => {
   const uuid = generateUuid()
 
   const bankroll: Bankroll = {
     uuid,
     name,
-    capital,
-    currency
+    initialCapital,
+    currency,
   }
 
   await create(bankroll)
