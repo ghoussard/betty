@@ -5,12 +5,12 @@ describe('handle create bankroll', () => {
   test('it creates a bankroll', async () => {
     const name = 'My bankroll'
     const uuid = 'uuid'
-    const capital = 100
+    const initialCapital = 100
     const currency = 'EUR'
     const bankroll: Bankroll = {
       uuid,
       name,
-      capital,
+      initialCapital,
       currency,
     }
 
@@ -22,7 +22,11 @@ describe('handle create bankroll', () => {
 
     const bankrollRepositorySpy = jest.spyOn(bankrollRepository, 'create')
 
-    await handleCreateBankroll(bankrollRepository, generateUuid, { name, capital, currency })
+    await handleCreateBankroll(bankrollRepository, generateUuid, {
+      name,
+      initialCapital,
+      currency,
+    })
 
     expect(bankrollRepositorySpy).toHaveBeenCalledWith(bankroll)
   })

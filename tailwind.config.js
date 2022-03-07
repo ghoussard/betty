@@ -1,7 +1,9 @@
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/front/components/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.tsx",
+    "./src/front/feature/components/**/*.tsx",
+    "./src/front/layout/components/**/*.tsx",
+    "./src/front/shared/components/**/*.tsx",
   ],
   theme: {
     extend: {},
