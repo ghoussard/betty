@@ -1,8 +1,1 @@
-{
-	"env": {
-		"FIREBASE_USE_EMULATOR": "1",
-		"FIREBASE_EMULATOR_HOST": "localhost",
-		"FIREBASE_EMULATOR_PORT": "8080",
-		"FIREBASE_PROJECT_ID": "e2e"
-	}
-}
+{}

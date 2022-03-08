@@ -35,8 +35,8 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
       <NumberInput
         name="initialCapital"
         value={formValues.initialCapital}
-        onChange={(number) =>
-          setFormValues({ ...formValues, initialCapital: number })
+        onChange={(initialCapital) =>
+          setFormValues({ ...formValues, initialCapital })
         }
       >
         Initial capital
