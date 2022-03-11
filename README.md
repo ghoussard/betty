@@ -15,10 +15,11 @@ Betty is a web app to manage your betting bankroll.
 
 - [x] Bootstrap project with Next.js
 - [x] Set up a CI/CD pipeline
-- [ ] Create a bankroll
+- [x] Create a bankroll
 - [ ] List bankrolls
+- [ ] Create a bet
 - [ ] List bets that belongs to the selected bankroll
-- [ ] Create/update/delete a bet
+- [ ] Update/delete a bet
 - [ ] Show a bankroll summary
 - [ ] Authentication system
 - [ ] PWA support
