@@ -21,7 +21,6 @@ const NumberInput = ({
       <input
         id={name}
         name={name}
-        className="block border leading-normal text-gray-700 md:shadow"
         type="number"
         value={value}
         onChange={handleChange}

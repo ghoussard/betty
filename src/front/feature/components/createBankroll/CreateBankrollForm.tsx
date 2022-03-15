@@ -24,7 +24,7 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+    <form onSubmit={handleSubmit}>
       <TextInput
         name="name"
         value={formValues.name}

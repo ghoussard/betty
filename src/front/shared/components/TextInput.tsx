@@ -20,7 +20,6 @@ const TextInput = ({
       <input
         id={name}
         name={name}
-        className="block border leading-normal text-gray-700 md:shadow"
         type="text"
         value={value}
         onChange={handleChange}
