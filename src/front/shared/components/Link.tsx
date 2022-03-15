@@ -10,7 +10,7 @@ const Link = (props: React.PropsWithChildren<LinkProps>) => {
 
   return (
     <NextLink {...nextLinkProps}>
-      <a className="text-gray-900 font-medium underline">{props.children}</a>
+      <a>{props.children}</a>
     </NextLink>
   )
 }

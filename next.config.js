@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
+  compiler: {
+    styledComponents: true,
+  },
 }
 
 module.exports = nextConfig

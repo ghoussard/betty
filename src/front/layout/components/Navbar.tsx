@@ -1,25 +1,37 @@
+import styled from 'styled-components'
 import Link from 'next/link'
+import { breakpoints } from '@/front/shared'
 
 type NavbarEntryProps = {
   children: React.ReactChild
   href: string
 }
 
+const NavbarEntryContainer = styled(Link)`
+  :focus {
+    text-color: white;
+  }
+
+  @media ${breakpoints.desktop} {
+    :hover {
+      text-color: white;
+    }
+  }
+`
+
+const NavbarContainer = styled.div`
+  display: flex;
+`
+
 const NavbarEntry = ({ children, href }: NavbarEntryProps) => {
-  return (
-    <Link href={href}>
-      <a className="p-2 h-12 focus:text-white md:hover:text-white">
-        {children}
-      </a>
-    </Link>
-  )
+  return <NavbarEntryContainer href={href}>{children}</NavbarEntryContainer>
 }
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 text-slate-100 flex">
+    <NavbarContainer>
       <NavbarEntry href="/">Bankrolls</NavbarEntry>
-    </nav>
+    </NavbarContainer>
   )
 }
 
