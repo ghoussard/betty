@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import styled from 'styled-components'
 import { breakpoints, colors } from '@/front/shared'
 import { Navbar } from './Navbar'
@@ -29,11 +29,20 @@ const ContentContainer = styled.div`
 `
 
 const Layout = ({ children }: LayoutProps) => {
+  const [navbarOpen, setNavbarOpen] = useState(false)
+
+  const toggleNavbar = () => setNavbarOpen(!navbarOpen)
+  const closeNavbar = () => setNavbarOpen(false)
+
   return (
     <Container>
-      <Navbar>
-        <Navbar.Tab href="/">Home</Navbar.Tab>
-        <Navbar.Tab href="/bankrolls">Bankrolls</Navbar.Tab>
+      <Navbar open={navbarOpen} onToggle={toggleNavbar}>
+        <Navbar.Tab href="/" onClick={closeNavbar}>
+          Home
+        </Navbar.Tab>
+        <Navbar.Tab href="/bankrolls" onClick={closeNavbar}>
+          Bankrolls
+        </Navbar.Tab>
       </Navbar>
       <ContentContainer>{children}</ContentContainer>
     </Container>
