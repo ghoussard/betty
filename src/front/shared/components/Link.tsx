@@ -1,16 +1,21 @@
+import { AnchorHTMLAttributes } from 'react'
+import styled from 'styled-components'
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
+import { colors } from '@/front/shared'
 
-type LinkProps = NextLinkProps
+const Container = styled.a`
+  text-decoration: none;
+  color: ${colors.green};
+  font-weight: 500;
+`
 
-const Link = (props: React.PropsWithChildren<LinkProps>) => {
-  const nextLinkProps = {
-    ...props,
-    children: undefined,
-  }
+type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
+  Pick<NextLinkProps, 'href'>
 
+const Link = ({ children, href, ...props }: LinkProps) => {
   return (
-    <NextLink {...nextLinkProps}>
-      <a>{props.children}</a>
+    <NextLink href={href} passHref>
+      <Container {...props}>{children}</Container>
     </NextLink>
   )
 }

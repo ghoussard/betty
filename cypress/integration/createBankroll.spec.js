@@ -7,7 +7,7 @@ describe('Create bankroll', () => {
       url: '/api/bankroll/create',
     }).as('createBankroll')
 
-    cy.visit('http://localhost:3000/bankroll/create')
+    cy.visit('http://localhost:3000/bankrolls/create')
     cy.get('input[name="name"]')
       .type('A bankroll')
       .should('have.value', 'A bankroll')

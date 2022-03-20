@@ -1,7 +1,16 @@
-type TitleProps = Record<string, unknown>
+import { ReactText, HTMLAttributes } from 'react'
+import styled from 'styled-components'
 
-const Title = ({ children }: React.PropsWithChildren<TitleProps>) => {
-  return <h1>{children}</h1>
+const Container = styled.h1`
+  line-height: 1.5;
+`
+
+type TitleProps = HTMLAttributes<HTMLElement> & {
+  children: ReactText
+}
+
+const Title = ({ children, ...props }: TitleProps) => {
+  return <Container {...props}>{children}</Container>
 }
 
 export { Title }

@@ -1,8 +1,17 @@
-import { PropsWithChildren } from 'react'
+import { AnchorHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { breakpoints, colors } from '@/front/shared'
+
+const isPathnameMatched = (
+  actualPathname: string,
+  testPathname: string
+): boolean => {
+  return '/' === testPathname
+    ? testPathname === actualPathname
+    : actualPathname.startsWith(testPathname)
+}
 
 const Container = styled.a<{ active: boolean }>`
   border-radius: 0.25rem;
@@ -24,17 +33,14 @@ const Container = styled.a<{ active: boolean }>`
   }
 `
 
-type TabProps = PropsWithChildren<{
-  href: string
-  onClick: () => void
-}>
+type TabProps = AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
 
-const Tab = ({ children, href, onClick }: TabProps) => {
+const Tab = ({ children, href, ...props }: TabProps) => {
   const router = useRouter()
 
   return (
     <Link href={href} passHref>
-      <Container active={router.pathname === href} onClick={onClick}>
+      <Container active={isPathnameMatched(router.pathname, href)} {...props}>
         {children}
       </Container>
     </Link>
