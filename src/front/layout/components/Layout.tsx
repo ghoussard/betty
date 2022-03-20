@@ -1,9 +1,11 @@
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { breakpoints, colors } from '@/front/shared'
 import { Navbar } from './Navbar'
 
-type LayoutProps = PropsWithChildren<{}>
+type LayoutProps = {
+  children: ReactNode
+}
 
 const Container = styled.div`
   width: 100vw;
