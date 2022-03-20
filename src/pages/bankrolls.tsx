@@ -1,12 +1,12 @@
 import { NextPage } from 'next'
 import { Title } from '@/front/shared'
 
-const Home: NextPage = () => {
+const Bankrolls: NextPage = () => {
   return (
     <>
-      <Title>Homepage</Title>
+      <Title>Bankrolls</Title>
     </>
   )
 }
 
-export default Home
+export default Bankrolls
