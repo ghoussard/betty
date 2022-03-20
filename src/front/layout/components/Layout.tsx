@@ -20,11 +20,42 @@ const Container = styled.div`
   }
 `
 
-const ContentContainer = styled.div`
-  margin-top: 30px;
+const FixedToggle = styled(Navbar.Toggle)`
+  position: fixed;
+  top: 5px;
+  left: 5px;
+
+  z-index: 1;
 
   @media ${breakpoints.desktop} {
-    margin-top: revert;
+    display: none;
+  }
+`
+
+const FixedNavbar = styled(Navbar)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 80vw;
+
+  @media ${breakpoints.desktop} {
+    position: revert;
+    width: 20vw;
+    visibility: visible;
+  }
+`
+
+const ContentContainer = styled.div`
+  padding: 0 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+
+  @media ${breakpoints.desktop} {
+    text-align: left;
   }
 `
 
@@ -36,14 +67,15 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <Container>
-      <Navbar open={navbarOpen} onToggle={toggleNavbar}>
+      <FixedToggle open={navbarOpen} onClick={toggleNavbar} />
+      <FixedNavbar open={navbarOpen}>
         <Navbar.Tab href="/" onClick={closeNavbar}>
           Home
         </Navbar.Tab>
         <Navbar.Tab href="/bankrolls" onClick={closeNavbar}>
           Bankrolls
         </Navbar.Tab>
-      </Navbar>
+      </FixedNavbar>
       <ContentContainer>{children}</ContentContainer>
     </Container>
   )

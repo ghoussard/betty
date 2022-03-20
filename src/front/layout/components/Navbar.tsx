@@ -1,15 +1,10 @@
-import { ReactElement } from 'react'
+import { HTMLAttributes, ReactElement } from 'react'
 import styled from 'styled-components'
-import { breakpoints, colors } from '@/front/shared'
+import { breakpoints, Title } from '@/front/shared'
 import { Tab, TabProps } from './Navbar/Tab'
+import { Toggle } from './Navbar/Toggle'
 
 const Container = styled.div<{ open: boolean }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 80vw;
-
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: inherit;
 
@@ -20,35 +15,15 @@ const Container = styled.div<{ open: boolean }>`
   visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 
   @media ${breakpoints.desktop} {
-    position: revert;
-    width: 20vw;
     box-shadow: revert;
-    visibility: visible;
   }
 `
 
-const Toggle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  padding: 0.5rem;
-
-  color: ${colors.green};
-  font-weight: 500;
-  z-index: 1;
-
-  @media ${breakpoints.desktop} {
-    display: none;
-  }
-`
-
-const Title = styled.h1`
+const CentredTitle = styled(Title)`
   text-align: center;
-  line-height: 2;
 `
 
-const TabsContainer = styled.div`
+const TabsContainer = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -56,24 +31,21 @@ const TabsContainer = styled.div`
   padding: 0 1rem;
 `
 
-type NavbarProps = {
+type NavbarProps = HTMLAttributes<HTMLElement> & {
   children: ReactElement<TabProps> | ReactElement<TabProps>[]
   open: boolean
-  onToggle: () => void
 }
 
-const Navbar = ({ children, open, onToggle }: NavbarProps) => {
+const Navbar = ({ children, open, ...props }: NavbarProps) => {
   return (
-    <>
-      <Toggle onClick={onToggle}>{open ? 'Close' : 'Open menu'}</Toggle>
-      <Container open={open}>
-        <Title>Betty</Title>
-        <TabsContainer>{children}</TabsContainer>
-      </Container>
-    </>
+    <Container open={open} {...props}>
+      <CentredTitle>Betty</CentredTitle>
+      <TabsContainer>{children}</TabsContainer>
+    </Container>
   )
 }
 
 Navbar.Tab = Tab
+Navbar.Toggle = Toggle
 
 export { Navbar }

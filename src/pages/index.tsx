@@ -4,7 +4,7 @@ import { Title } from '@/front/shared'
 const Home: NextPage = () => {
   return (
     <>
-      <Title>Homepage</Title>
+      <Title>Home</Title>
     </>
   )
 }
