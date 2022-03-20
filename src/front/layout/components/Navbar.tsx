@@ -1,9 +1,9 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import styled from 'styled-components'
 import { breakpoints, colors } from '@/front/shared'
 import { Tab, TabProps } from './Navbar/Tab'
 
-const Container = styled.div<{ isOpen: boolean }>`
+const Container = styled.div<{ open: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -17,7 +17,7 @@ const Container = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   gap: 20px;
 
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 
   @media ${breakpoints.desktop} {
     position: revert;
@@ -58,17 +58,15 @@ const TabsContainer = styled.div`
 
 type NavbarProps = {
   children: ReactElement<TabProps> | ReactElement<TabProps>[]
+  open: boolean
+  onToggle: () => void
 }
 
-const Navbar = ({ children }: NavbarProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
+const Navbar = ({ children, open, onToggle }: NavbarProps) => {
   return (
     <>
-      <Toggle onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? 'Close' : 'Open menu'}
-      </Toggle>
-      <Container isOpen={isOpen}>
+      <Toggle onClick={onToggle}>{open ? 'Close' : 'Open menu'}</Toggle>
+      <Container open={open}>
         <Title>Betty</Title>
         <TabsContainer>{children}</TabsContainer>
       </Container>

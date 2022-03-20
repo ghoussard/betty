@@ -26,14 +26,17 @@ const Container = styled.a<{ active: boolean }>`
 
 type TabProps = PropsWithChildren<{
   href: string
+  onClick: () => void
 }>
 
-const Tab = ({ children, href }: TabProps) => {
+const Tab = ({ children, href, onClick }: TabProps) => {
   const router = useRouter()
 
   return (
     <Link href={href} passHref>
-      <Container active={router.pathname === href}>{children}</Container>
+      <Container active={router.pathname === href} onClick={onClick}>
+        {children}
+      </Container>
     </Link>
   )
 }
