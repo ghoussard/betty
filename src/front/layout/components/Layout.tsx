@@ -1,38 +1,40 @@
+import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { breakpoints } from '@/front/shared'
-import { Navbar } from '@/front/layout'
+import { breakpoints, colors } from '@/front/shared'
+import { Navbar } from './Navbar'
 
-type LayoutProps = {
-  children: React.ReactChild
-}
+type LayoutProps = PropsWithChildren<{}>
 
-const LayoutContainer = styled.div`
-  display: flex;
-  flex-direction: column-reverse;
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: #fafafa;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  background-color: ${colors.white};
+  color: ${colors.black};
+  font-family: 'Roboto', sans-serif;
 
   @media ${breakpoints.desktop} {
-    flex-direction: row;
+    display: flex;
   }
 `
 
-const ChildrenContainer = styled.div`
-  height: 100%;
-  padding: 1rem;
+const ContentContainer = styled.div`
+  margin-top: 30px;
 
   @media ${breakpoints.desktop} {
-    width: 80%;
+    margin-top: revert;
   }
 `
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <LayoutContainer>
-      <Navbar />
-      <ChildrenContainer>{children}</ChildrenContainer>
-    </LayoutContainer>
+    <Container>
+      <Navbar>
+        <Navbar.Tab href="/">Home</Navbar.Tab>
+        <Navbar.Tab href="/bankrolls">Bankrolls</Navbar.Tab>
+      </Navbar>
+      <ContentContainer>{children}</ContentContainer>
+    </Container>
   )
 }
 
