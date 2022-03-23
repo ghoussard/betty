@@ -17,4 +17,9 @@ describe('Button component', () => {
 
     expect(onClick).toHaveBeenCalled()
   })
+
+  test('it accepts a className props to extends it with styled-components', () => {
+    render(<Button className="test-class">Button</Button>)
+    expect(screen.getByText('Button')).toHaveClass('test-class')
+  })
 })
