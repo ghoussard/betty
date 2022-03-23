@@ -50,12 +50,8 @@ describe('Field component', () => {
     )
   })
 
-  test('it accepts a className props to extends it with styled-components', () => {
-    render(
-      <Field name="a_field" className="test-class">
-        Field
-      </Field>
-    )
+  test('it accepts a className props to extend it with styled-components', () => {
+    render(<Field className="test-class">Field</Field>)
     expect(screen.getByText('Field')).toHaveClass('test-class')
   })
 })
