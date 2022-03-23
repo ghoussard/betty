@@ -2,7 +2,7 @@ import { AnchorHTMLAttributes } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { breakpoints, colors } from '@/front/shared'
+import { breakpoints, colors, Override } from '@/front/shared'
 
 const isPathnameMatched = (
   actualPathname: string,
@@ -16,7 +16,6 @@ const isPathnameMatched = (
 const Container = styled.a<{ active: boolean }>`
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
-
   text-align: center;
   font-weight: 500;
   text-decoration: none;
@@ -33,7 +32,10 @@ const Container = styled.a<{ active: boolean }>`
   }
 `
 
-type TabProps = AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
+type TabProps = Override<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  { href: string }
+>
 
 const Tab = ({ children, href, ...props }: TabProps) => {
   const router = useRouter()

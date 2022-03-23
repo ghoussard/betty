@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Router from 'next/router'
-import { Title } from '@/front/shared'
+import { Title, Link } from '@/front/shared'
 import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
 const CreateBankroll: NextPage = () => {
@@ -21,6 +21,7 @@ const CreateBankroll: NextPage = () => {
   return (
     <>
       <Title>Create bankroll</Title>
+      <Link href="/bankrolls">Go back</Link>
       <CreateBankrollForm onSubmit={handleFormSubmitted} />
     </>
   )
