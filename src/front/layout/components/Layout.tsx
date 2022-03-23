@@ -10,7 +10,6 @@ type LayoutProps = {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-
   background-color: ${colors.white};
   color: ${colors.black};
   font-family: 'Roboto', sans-serif;
@@ -24,7 +23,6 @@ const FixedToggle = styled(Navbar.Toggle)`
   position: fixed;
   top: 5px;
   left: 5px;
-
   z-index: 1;
 
   @media ${breakpoints.desktop} {
@@ -47,11 +45,10 @@ const FixedNavbar = styled(Navbar)`
 `
 
 const ContentContainer = styled.div`
-  padding: 0 1rem;
-
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 0 1rem;
   text-align: center;
 
   @media ${breakpoints.desktop} {

@@ -1,17 +1,15 @@
 import { HTMLAttributes, ReactElement } from 'react'
 import styled from 'styled-components'
-import { breakpoints, Title } from '@/front/shared'
 import { Tab, TabProps } from './Navbar/Tab'
 import { Toggle } from './Navbar/Toggle'
+import { breakpoints, Title, Override } from '@/front/shared'
 
 const Container = styled.div<{ open: boolean }>`
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: inherit;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
-
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: inherit;
   visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
 
   @media ${breakpoints.desktop} {
@@ -27,23 +25,23 @@ const TabsContainer = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   padding: 0 1rem;
 `
 
-type NavbarProps = HTMLAttributes<HTMLElement> & {
-  children: ReactElement<TabProps> | ReactElement<TabProps>[]
-  open: boolean
-}
+type NavbarProps = Override<
+  HTMLAttributes<HTMLElement>,
+  {
+    children: ReactElement<TabProps> | ReactElement<TabProps>[]
+    open: boolean
+  }
+>
 
-const Navbar = ({ children, open, ...props }: NavbarProps) => {
-  return (
-    <Container open={open} {...props}>
-      <CentredTitle>Betty</CentredTitle>
-      <TabsContainer>{children}</TabsContainer>
-    </Container>
-  )
-}
+const Navbar = ({ children, open, ...props }: NavbarProps) => (
+  <Container open={open} {...props}>
+    <CentredTitle>Betty</CentredTitle>
+    <TabsContainer>{children}</TabsContainer>
+  </Container>
+)
 
 Navbar.Tab = Tab
 Navbar.Toggle = Toggle

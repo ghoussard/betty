@@ -1,5 +1,13 @@
 import { FormEvent, useState } from 'react'
-import { Button, NumberInput, TextInput } from '@/front/shared'
+import { Button, Field, Label, NumberInput, TextInput } from '@/front/shared'
+import styled from 'styled-components'
+
+const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+`
 
 type CreateBankrollFormValues = {
   name: string
@@ -24,32 +32,32 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextInput
-        name="name"
-        value={formValues.name}
-        onChange={(name) => setFormValues({ ...formValues, name })}
-      >
-        Name
-      </TextInput>
-      <NumberInput
-        name="initialCapital"
-        value={formValues.initialCapital}
-        onChange={(initialCapital) =>
-          setFormValues({ ...formValues, initialCapital })
-        }
-      >
-        Initial capital
-      </NumberInput>
-      <TextInput
-        name="currency"
-        value={formValues.currency}
-        onChange={(currency) => setFormValues({ ...formValues, currency })}
-      >
-        Currency
-      </TextInput>
+    <Container onSubmit={handleSubmit}>
+      <Field name="name">
+        <Label>Name</Label>
+        <TextInput
+          value={formValues.name}
+          onChange={(name) => setFormValues({ ...formValues, name })}
+        />
+      </Field>
+      <Field name="initalCapital">
+        <Label>Initial capital</Label>
+        <NumberInput
+          value={formValues.initialCapital}
+          onChange={(initialCapital) =>
+            setFormValues({ ...formValues, initialCapital })
+          }
+        />
+      </Field>
+      <Field name="currency">
+        <Label>Currency</Label>
+        <TextInput
+          value={formValues.currency}
+          onChange={(currency) => setFormValues({ ...formValues, currency })}
+        />
+      </Field>
       <Button onClick={handleSubmit}>Create</Button>
-    </form>
+    </Container>
   )
 }
 
