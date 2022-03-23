@@ -16,7 +16,7 @@ const Container = styled.div`
   gap: 5px;
 `
 
-type FieldProps = Override<HTMLAttributes<HTMLDivElement>, { name: string }>
+type FieldProps = Override<HTMLAttributes<HTMLDivElement>, { name?: string }>
 
 const isComponent = (child: unknown): child is ReactElement<unknown> =>
   'object' === typeof child && isValidElement<unknown>(child)
@@ -30,6 +30,10 @@ const isInputComponent = (
   isComponent(child) && (child.type === TextInput || child.type === NumberInput)
 
 const Field = ({ children, name, ...props }: FieldProps) => {
+  if (undefined === name) {
+    return <Container {...props}>{children}</Container>
+  }
+
   const inputId = `${name}Input`
 
   return (
