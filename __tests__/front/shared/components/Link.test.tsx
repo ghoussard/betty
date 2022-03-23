@@ -7,7 +7,7 @@ describe('Link component', () => {
     expect(screen.getByText('Link')).toBeInTheDocument()
   })
 
-  test('it accepts a className props to extends it with styled-components', () => {
+  test('it accepts a className props to extend it with styled-components', () => {
     render(
       <Link className="test-class" href="/">
         Link

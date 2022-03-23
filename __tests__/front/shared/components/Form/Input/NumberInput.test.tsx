@@ -12,7 +12,7 @@ describe('NumberInput component', () => {
     expect(onChange).toHaveBeenCalledWith(1)
   })
 
-  test('it accepts a className props to extends it with styled-components', () => {
+  test('it accepts a className props to extend it with styled-components', () => {
     render(<NumberInput data-testid="testInput" className="test-class" />)
     expect(screen.getByTestId('testInput')).toHaveClass('test-class')
   })

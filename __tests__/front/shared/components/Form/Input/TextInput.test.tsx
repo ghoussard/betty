@@ -12,7 +12,7 @@ describe('TextInput component', () => {
     expect(onChange).toHaveBeenCalledWith('betty')
   })
 
-  test('it accepts a className props to extends it with styled-components', () => {
+  test('it accepts a className props to extend it with styled-components', () => {
     render(<TextInput data-testid="testInput" className="test-class" />)
     expect(screen.getByTestId('testInput')).toHaveClass('test-class')
   })
