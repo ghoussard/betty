@@ -6,4 +6,9 @@ describe('Title component', () => {
     render(<Title>Title</Title>)
     expect(screen.getByText('Title')).toBeInTheDocument()
   })
+
+  test('it accepts a className props to extends it with styled-components', () => {
+    render(<Title className="test-class">Title</Title>)
+    expect(screen.getByText('Title')).toHaveClass('test-class')
+  })
 })
