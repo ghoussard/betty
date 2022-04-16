@@ -1,5 +1,5 @@
 import { Bankroll } from '@/back/domain'
-import { bankrollRepository } from '@/back/infrastructure'
+import { bankrollRepository } from '@/back/infrastructure/repository/bankroll'
 
 describe('bankroll repository', () => {
   test('it creates a bankroll', async () => {

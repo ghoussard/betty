@@ -1,9 +1,7 @@
 import {
-  getFirebaseUseEmulator,
-  getFirebaseOptions,
-  getFirebaseEmulatorHost,
-  getFirebaseEmulatorPort,
-} from '@/back/infrastructure'
+  getFirebaseServiceAccount,
+  shouldUseFirestoreEmulator,
+} from '@/back/infrastructure/environments'
 import { env } from 'process'
 
 const setEnvVar = (key: string, value: string): void => {
@@ -22,37 +20,25 @@ describe('environments', () => {
     process.env = INITIAL_ENV
   })
 
-  test('it returns the firebase options', () => {
-    setEnvVar('FIREBASE_API_KEY', 'apiKey')
-    setEnvVar('FIREBASE_AUTH_DOMAIN', 'authDomain')
+  test('it returns firebase service account', () => {
     setEnvVar('FIREBASE_PROJECT_ID', 'projectId')
-    setEnvVar('FIREBASE_STORAGE_BUCKET', 'storageBucket')
-    setEnvVar('FIREBASE_MESSAGING_SENDER_ID', 'messagingSenderId')
+    setEnvVar('FIREBASE_CLIENT_EMAIL', 'clientEmail')
+    setEnvVar(
+      'FIREBASE_PRIVATE_KEY',
+      '-----BEGIN PRIVATE KEY-----\nmyprivatekey\n-----END PRIVATE KEY-----\n'
+    )
 
-    expect(getFirebaseOptions()).toEqual({
-      apiKey: 'apiKey',
-      authDomain: 'authDomain',
+    expect(getFirebaseServiceAccount()).toEqual({
       projectId: 'projectId',
-      storageBucket: 'storageBucket',
-      messagingSenderId: 'messagingSenderId',
+      clientEmail: 'clientEmail',
+      privateKey:
+        '-----BEGIN PRIVATE KEY-----\nmyprivatekey\n-----END PRIVATE KEY-----\n',
     })
   })
 
-  test('it returns firebase options when use emulator is true', () => {
-    setEnvVar('FIREBASE_USE_EMULATOR', '1')
-    setEnvVar('FIREBASE_PROJECT_ID', 'betty-test')
+  test('it say if we should use the firebase emulator', () => {
+    setEnvVar('FIRESTORE_EMULATOR_HOST', 'localhost:8080')
 
-    expect(getFirebaseUseEmulator()).toBe(true)
-    expect(getFirebaseOptions()).toEqual({
-      projectId: 'betty-test',
-    })
-  })
-
-  test('it returns firebase emulator host and port', () => {
-    setEnvVar('FIREBASE_EMULATOR_HOST', 'localhost')
-    setEnvVar('FIREBASE_EMULATOR_PORT', '8080')
-
-    expect(getFirebaseEmulatorHost()).toBe('localhost')
-    expect(getFirebaseEmulatorPort()).toBe(8080)
+    expect(shouldUseFirestoreEmulator()).toBe(true)
   })
 })

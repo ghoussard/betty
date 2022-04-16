@@ -1,5 +1,4 @@
-import { getDocs, query, where } from 'firebase/firestore'
-import { CollectionName, getCollectionReference } from '@/back/infrastructure'
+import { CollectionName, firestore } from '@/back/infrastructure'
 
 interface FirestoreMatchers<R = unknown> {
   toBeSaved(collectionName: string, matchProperty: string): Promise<R>
@@ -14,20 +13,17 @@ declare global {
 }
 
 expect.extend({
-  async toBeSaved(
-    received: unknown,
+  async toBeSaved<Document>(
+    received: Document,
     collectionName: CollectionName,
-    matchProperty: string
+    matchProperty: keyof Document
   ): Promise<jest.CustomMatcherResult> {
-    const collectionReference = getCollectionReference(collectionName)
-    // @ts-ignore
     const matchValue = received[matchProperty]
 
-    const searchQuery = query(
-      collectionReference,
-      where(matchProperty, '==', matchValue)
-    )
-    const querySnapshot = await getDocs(searchQuery)
+    const querySnapshot = await firestore
+      .collection(collectionName)
+      .where(matchProperty as string, '==', matchValue)
+      .get()
 
     const pass = 0 < querySnapshot.docs.length
 

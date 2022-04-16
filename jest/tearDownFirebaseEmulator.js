@@ -1,9 +1,6 @@
-const {
-  clearAllCollections,
-  deleteFirebaseApp,
-} = require('@/back/infrastructure')
+const { clearFirestore, closeApp } = require('@/back/infrastructure')
 
 afterAll(async () => {
-  await clearAllCollections()
-  await deleteFirebaseApp()
+  await clearFirestore()
+  await closeApp()
 })
