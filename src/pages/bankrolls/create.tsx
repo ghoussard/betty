@@ -5,7 +5,7 @@ import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
 const CreateBankroll: NextPage = () => {
   const handleFormSubmitted = async (formValues: CreateBankrollFormValues) => {
-    const response = await fetch('/api/bankroll/create', {
+    const response = await fetch('/api/bankrolls/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

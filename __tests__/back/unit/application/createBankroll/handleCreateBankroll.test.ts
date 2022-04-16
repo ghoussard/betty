@@ -1,5 +1,5 @@
 import { Bankroll, BankrollRepository } from '@/back/domain'
-import { handleCreateBankroll } from '@/back/application'
+import { handleCreateBankroll } from '@/back/application/createBankroll/handleCreateBankroll'
 
 describe('handle create bankroll', () => {
   test('it creates a bankroll', async () => {

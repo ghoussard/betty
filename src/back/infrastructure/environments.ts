@@ -1,32 +1,25 @@
 import { env } from 'process'
-import { FirebaseOptions } from 'firebase/app'
+import { ServiceAccount } from 'firebase-admin'
 
-const getFirebaseUseEmulator = (): boolean =>
-  '1' === (env.FIREBASE_USE_EMULATOR ?? '0')
-const getFirebaseEmulatorHost = (): string => env.FIREBASE_EMULATOR_HOST ?? ''
-const getFirebaseEmulatorPort = (): number =>
-  parseInt(env.FIREBASE_EMULATOR_PORT ?? '0')
+const shouldUseFirestoreEmulator = (): boolean =>
+  '' !== (env.FIRESTORE_EMULATOR_HOST ?? '')
 
-const getFirebaseOptions = (): FirebaseOptions => {
-  if (getFirebaseUseEmulator()) {
-    return {
-      projectId: env.FIREBASE_PROJECT_ID ?? '',
-    }
-  }
+const getFirebaseProjectId = (): string => env.FIREBASE_PROJECT_ID ?? ''
+
+const getFirebaseServiceAccount = (): ServiceAccount => {
+  const projectId = getFirebaseProjectId()
+  const clientEmail = env.FIREBASE_CLIENT_EMAIL ?? ''
+  const privateKey = (env.FIREBASE_PRIVATE_KEY ?? '').replace(/\\n/g, '\n')
 
   return {
-    apiKey: env.FIREBASE_API_KEY,
-    authDomain: env.FIREBASE_AUTH_DOMAIN,
-    projectId: env.FIREBASE_PROJECT_ID,
-    storageBucket: env.FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: env.FIREBASE_MESSAGING_SENDER_ID,
-    appId: env.FIREBASE_APP_ID,
+    projectId,
+    clientEmail,
+    privateKey,
   }
 }
 
 export {
-  getFirebaseUseEmulator,
-  getFirebaseEmulatorHost,
-  getFirebaseEmulatorPort,
-  getFirebaseOptions,
+  shouldUseFirestoreEmulator,
+  getFirebaseProjectId,
+  getFirebaseServiceAccount,
 }

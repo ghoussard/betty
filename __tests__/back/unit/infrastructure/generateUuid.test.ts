@@ -1,4 +1,4 @@
-import { generateUuid } from '@/back/infrastructure'
+import { generateUuid } from '@/back/infrastructure/generateUuid'
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('an_uuid'),
