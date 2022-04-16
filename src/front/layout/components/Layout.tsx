@@ -36,10 +36,12 @@ const FixedNavbar = styled(Navbar)`
   left: 0;
   height: 100vh;
   width: 80vw;
+  max-width: 400px;
 
   @media ${breakpoints.desktop} {
     position: revert;
     width: 20vw;
+    max-width: none;
     visibility: visible;
   }
 `

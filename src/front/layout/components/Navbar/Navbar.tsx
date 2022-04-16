@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactElement } from 'react'
 import styled from 'styled-components'
-import { Tab, TabProps } from './Navbar/Tab'
-import { Toggle } from './Navbar/Toggle'
+import { Tab, TabProps } from './Tab'
+import { Toggle } from './Toggle'
 import { breakpoints, Title, Override } from '@/front/shared'
 
 const Container = styled.div<{ open: boolean }>`
