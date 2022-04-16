@@ -36,7 +36,7 @@ describe('environments', () => {
     })
   })
 
-  test('it say if we should use the firebase emulator', () => {
+  test('it says if we should use the firebase emulator', () => {
     setEnvVar('FIRESTORE_EMULATOR_HOST', 'localhost:8080')
 
     expect(shouldUseFirestoreEmulator()).toBe(true)
