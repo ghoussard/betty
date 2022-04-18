@@ -1,9 +1,11 @@
 import { NextPage } from 'next'
 import Router from 'next/router'
-import { Title, Link } from '@/front/shared'
+import { Title, Link, useNotify } from '@/front/shared'
 import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
 const CreateBankroll: NextPage = () => {
+  const notify = useNotify()
+
   const handleFormSubmitted = async (formValues: CreateBankrollFormValues) => {
     const response = await fetch('/api/bankrolls/create', {
       method: 'POST',
@@ -15,6 +17,7 @@ const CreateBankroll: NextPage = () => {
 
     if (response.ok) {
       Router.push('/')
+      notify({ level: 'success', content: 'Bankroll sucessfully created' })
     }
   }
 
