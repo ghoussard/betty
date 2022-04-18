@@ -1,7 +1,13 @@
 import { ReactNode, useState } from 'react'
 import styled from 'styled-components'
-import { breakpoints, colors } from '@/front/shared'
+import {
+  breakpoints,
+  colors,
+  Notification,
+  useListenNotification,
+} from '@/front/shared'
 import { Navbar } from './Navbar'
+import { Flash } from './Flash'
 
 type LayoutProps = {
   children: ReactNode
@@ -60,12 +66,18 @@ const ContentContainer = styled.div`
 
 const Layout = ({ children }: LayoutProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false)
+  const [flashMessages, setFlashMessages] = useState<Notification[]>([])
+
+  useListenNotification((notification: Notification) =>
+    setFlashMessages((messages) => [...messages, notification])
+  )
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen)
   const closeNavbar = () => setNavbarOpen(false)
 
   return (
     <Container>
+      <Flash messages={flashMessages} />
       <FixedToggle open={navbarOpen} onClick={toggleNavbar} />
       <FixedNavbar open={navbarOpen}>
         <Navbar.Tab href="/" onClick={closeNavbar}>
