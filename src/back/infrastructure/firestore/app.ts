@@ -19,9 +19,15 @@ const getAppOptions = (): admin.AppOptions => {
   }
 }
 
-const appOptions = getAppOptions()
+const getApp = (): admin.app.App => {
+  if (0 === admin.apps.length) {
+    admin.initializeApp(getAppOptions())
+  }
 
-const app = admin.initializeApp(appOptions)
+  return admin.app()
+}
+
+const app = getApp()
 
 const firestore = app.firestore()
 
