@@ -3,12 +3,12 @@ import { eventEmitter, NOTIFICATION_EVENT } from './common'
 import { Notification } from '../../models'
 
 const useListenNotification = (
-  callback: (data: Notification) => void
+  handler: (notification: Notification) => void
 ): void => {
   useEffect(() => {
-    eventEmitter.on(NOTIFICATION_EVENT, callback)
-    return () => void eventEmitter.off(NOTIFICATION_EVENT, callback)
-  }, [callback])
+    eventEmitter.on(NOTIFICATION_EVENT, handler)
+    return () => void eventEmitter.off(NOTIFICATION_EVENT, handler)
+  }, [handler])
 }
 
 export { useListenNotification }
