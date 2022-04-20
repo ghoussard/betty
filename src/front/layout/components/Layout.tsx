@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import {
   breakpoints,
   colors,
-  Notification,
+  Notification as NotificationModel,
   useListenNotification,
 } from '@/front/shared'
 import { Navbar } from './Navbar'
-import { Flash } from './Flash'
+import { Notification } from './Notification'
 
 type LayoutProps = {
   children: ReactNode
@@ -22,6 +22,23 @@ const Container = styled.div`
 
   @media ${breakpoints.desktop} {
     display: flex;
+  }
+`
+
+const NotificationsOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+
+  @media ${breakpoints.desktop} {
+    width: 20%;
+    align-items: flex-end;
+    padding: 1rem;
   }
 `
 
@@ -66,18 +83,32 @@ const ContentContainer = styled.div`
 
 const Layout = ({ children }: LayoutProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false)
-  const [flashMessages, setFlashMessages] = useState<Notification[]>([])
+  const [notifications, setNotifications] = useState<NotificationModel[]>([])
 
-  useListenNotification((notification: Notification) =>
-    setFlashMessages((messages) => [...messages, notification])
+  useListenNotification((notification: NotificationModel) =>
+    setNotifications((notifications) => [...notifications, notification])
   )
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen)
   const closeNavbar = () => setNavbarOpen(false)
 
+  const handleRemoveNotification = (index: number) => {
+    setNotifications((notifications) =>
+      notifications.filter((_, currentIndex) => currentIndex !== index)
+    )
+  }
+
   return (
     <Container>
-      <Flash messages={flashMessages} />
+      <NotificationsOverlay>
+        {notifications.map((notification, index) => (
+          <Notification
+            key={index}
+            notification={notification}
+            onRemove={() => handleRemoveNotification(index)}
+          />
+        ))}
+      </NotificationsOverlay>
       <FixedToggle open={navbarOpen} onClick={toggleNavbar} />
       <FixedNavbar open={navbarOpen}>
         <Navbar.Tab href="/" onClick={closeNavbar}>
