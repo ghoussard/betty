@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import {
   breakpoints,
   colors,
-  Notification as NotificationModel,
+  Notification,
+  Override,
   useListenNotification,
+  generateUuid,
 } from '@/front/shared'
 import { Navbar } from './Navbar'
-import { Notification } from './Notification'
+import { Flash } from './Flash'
 
 type LayoutProps = {
   children: ReactNode
@@ -25,19 +27,20 @@ const Container = styled.div`
   }
 `
 
-const NotificationsOverlay = styled.div`
+const FlashOverlay = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
+  padding: 1rem;
+  gap: 1rem;
 
   @media ${breakpoints.desktop} {
     width: 20%;
-    align-items: flex-end;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
     padding: 1rem;
   }
 `
@@ -81,34 +84,47 @@ const ContentContainer = styled.div`
   }
 `
 
+type IdentifiedNotification = Override<Notification, { uuid: string }>
+
 const Layout = ({ children }: LayoutProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false)
-  const [notifications, setNotifications] = useState<NotificationModel[]>([])
-
-  useListenNotification((notification: NotificationModel) =>
-    setNotifications((notifications) => [...notifications, notification])
+  const [notifications, setNotifications] = useState<IdentifiedNotification[]>(
+    []
   )
+
+  useListenNotification((notification: Notification) => {
+    const identifiedNotification: IdentifiedNotification = {
+      ...notification,
+      uuid: generateUuid(),
+    }
+    setNotifications((notifications) => [
+      ...notifications,
+      identifiedNotification,
+    ])
+  })
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen)
   const closeNavbar = () => setNavbarOpen(false)
 
-  const handleRemoveNotification = (index: number) => {
+  const handleNotificationClose = (uuid: string): void => {
     setNotifications((notifications) =>
-      notifications.filter((_, currentIndex) => currentIndex !== index)
+      notifications.filter((notification) => uuid !== notification.uuid)
     )
   }
 
   return (
     <Container>
-      <NotificationsOverlay>
-        {notifications.map((notification, index) => (
-          <Notification
-            key={index}
-            notification={notification}
-            onRemove={() => handleRemoveNotification(index)}
-          />
+      <FlashOverlay>
+        {notifications.map(({ uuid, level, message }) => (
+          <Flash
+            key={uuid}
+            level={level}
+            onClose={() => handleNotificationClose(uuid)}
+          >
+            {message}
+          </Flash>
         ))}
-      </NotificationsOverlay>
+      </FlashOverlay>
       <FixedToggle open={navbarOpen} onClick={toggleNavbar} />
       <FixedNavbar open={navbarOpen}>
         <Navbar.Tab href="/" onClick={closeNavbar}>

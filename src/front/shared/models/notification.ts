@@ -2,7 +2,7 @@ type NotificationLevel = 'success' | 'info' | 'warning' | 'error'
 
 type Notification = {
   level: NotificationLevel
-  content: string
+  message: string
 }
 
-export type { Notification }
+export type { Notification, NotificationLevel }
