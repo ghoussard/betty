@@ -84,43 +84,40 @@ const ContentContainer = styled.div`
   }
 `
 
-type IdentifiedNotification = Override<Notification, { uuid: string }>
+type FlashMessage = Override<
+  Notification,
+  { uuid: string; onClose: () => void }
+>
 
 const Layout = ({ children }: LayoutProps) => {
   const [navbarOpen, setNavbarOpen] = useState(false)
-  const [notifications, setNotifications] = useState<IdentifiedNotification[]>(
-    []
-  )
+  const [flashMessages, setFlashMessages] = useState<FlashMessage[]>([])
 
   useListenNotification((notification: Notification) => {
-    const identifiedNotification: IdentifiedNotification = {
+    const uuid = generateUuid()
+
+    const onClose = () =>
+      setFlashMessages((flashMessages) =>
+        flashMessages.filter((flashMessage) => flashMessage.uuid !== uuid)
+      )
+
+    const flashMessage: FlashMessage = {
       ...notification,
-      uuid: generateUuid(),
+      uuid,
+      onClose,
     }
-    setNotifications((notifications) => [
-      ...notifications,
-      identifiedNotification,
-    ])
+
+    setFlashMessages((flashMessages) => [...flashMessages, flashMessage])
   })
 
   const toggleNavbar = () => setNavbarOpen(!navbarOpen)
   const closeNavbar = () => setNavbarOpen(false)
 
-  const handleNotificationClose = (uuid: string): void => {
-    setNotifications((notifications) =>
-      notifications.filter((notification) => uuid !== notification.uuid)
-    )
-  }
-
   return (
     <Container>
       <FlashOverlay>
-        {notifications.map(({ uuid, level, message }) => (
-          <Flash
-            key={uuid}
-            level={level}
-            onClose={() => handleNotificationClose(uuid)}
-          >
+        {flashMessages.map(({ uuid, level, message, onClose }) => (
+          <Flash key={uuid} level={level} onClose={onClose}>
             {message}
           </Flash>
         ))}
