@@ -17,7 +17,7 @@ const CreateBankroll: NextPage = () => {
 
     if (response.ok) {
       Router.push('/')
-      notify({ level: 'success', content: 'Bankroll sucessfully created' })
+      notify({ level: 'success', message: 'Bankroll sucessfully created' })
     }
   }
 
