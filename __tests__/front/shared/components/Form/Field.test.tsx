@@ -1,5 +1,6 @@
 import { screen, render } from '@testing-library/react'
-import { Field, Label, TextInput } from '@/front/shared'
+import { Label, TextInput } from '@/front/shared'
+import { Field } from '@/front/shared/components/Form/Field'
 
 describe('Field component', () => {
   test('it renders children when name is undefined', () => {

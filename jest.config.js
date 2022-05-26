@@ -37,7 +37,7 @@ switch (env.JEST_TEST_SUITE) {
   case 'front':
     configOverrides = {
       testEnvironment: 'jest-environment-jsdom',
-      testMatch: ['<rootDir>/__tests__/front/**/*.test.ts(x)'],
+      testMatch: ['<rootDir>/__tests__/front/**/*.test.ts?(x)'],
       setupFilesAfterEnv: [
         '@testing-library/jest-dom/extend-expect',
       ],

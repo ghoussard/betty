@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { Link } from '@/front/shared'
+import { Link } from '@/front/shared/components/Link'
 
 describe('Link component', () => {
   test('it renders children', () => {

@@ -1,5 +1,5 @@
 import { screen, render } from '@testing-library/react'
-import { Label } from '@/front/shared'
+import { Label } from '@/front/shared/components/Form/Label'
 
 describe('Label component', () => {
   test('it renders children', () => {
