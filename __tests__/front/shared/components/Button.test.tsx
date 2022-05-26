@@ -1,5 +1,5 @@
 import { screen, render, fireEvent } from '@testing-library/react'
-import { Button } from '@/front/shared'
+import { Button } from '@/front/shared/components/Button'
 
 describe('Button component', () => {
   test('it renders children', () => {

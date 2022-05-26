@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { TextInput } from '@/front/shared'
+import { TextInput } from '@/front/shared/components/Form/Input/TextInput'
 
 describe('TextInput component', () => {
   test('it triggers onChange callback when it is changed', () => {

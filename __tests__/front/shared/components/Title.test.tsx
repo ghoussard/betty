@@ -1,5 +1,5 @@
 import { screen, render } from '@testing-library/react'
-import { Title } from '@/front/shared'
+import { Title } from '@/front/shared/components/Title'
 
 describe('Title component', () => {
   test('it renders children', () => {

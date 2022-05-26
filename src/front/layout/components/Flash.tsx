@@ -2,7 +2,7 @@ import { HTMLAttributes, ReactText } from 'react'
 import styled from 'styled-components'
 import { Override, NotificationLevel, useTimeout, colors } from '@/front/shared'
 
-const NOTIFICATION_DURATION = 5000
+const FLASH_DURATION = 5000
 
 const getColorForLevel = (level: NotificationLevel): string => {
   switch (level) {
@@ -46,7 +46,7 @@ type FlashProps = Override<
 >
 
 const Flash = ({ children, onClose, ...props }: FlashProps) => {
-  useTimeout(onClose, NOTIFICATION_DURATION)
+  useTimeout(onClose, FLASH_DURATION)
 
   return (
     <Container {...props}>

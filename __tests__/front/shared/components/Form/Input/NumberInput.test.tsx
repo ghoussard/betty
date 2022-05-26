@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { NumberInput } from '@/front/shared'
+import { NumberInput } from '@/front/shared/components/Form/Input/NumberInput'
 
 describe('NumberInput component', () => {
   test('it triggers onChange callback when it is changed', () => {

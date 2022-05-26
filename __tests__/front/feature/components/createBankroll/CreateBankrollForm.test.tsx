@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { CreateBankrollForm } from '@/front/feature'
+import { CreateBankrollForm } from '@/front/feature/components/createBankroll/CreateBankrollForm'
 
 describe('CreateBankrollForm component', () => {
   test('it triggers onSubmit callback when it is submitted', () => {
