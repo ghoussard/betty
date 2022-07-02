@@ -7,15 +7,14 @@
     "start": "next start",
     "lint": "next lint --dir src",
     "lint:fix": "next lint --dir src --fix",
-    "prettier": "prettier --config .prettierrc.json --check src cypress __tests__ jest",
-    "prettier:fix": "prettier --config .prettierrc.json --write src cypress __tests__ jest",
+    "prettier": "prettier --config .prettierrc.json --check src cypress __tests__ jest scripts",
+    "prettier:fix": "prettier --config .prettierrc.json --write src cypress __tests__ jest scripts",
     "test:back:unit": "JEST_TEST_SUITE=back:unit jest",
     "test:back:integration": "firebase emulators:exec --only firestore --project test 'JEST_TEST_SUITE=back:integration jest --detectOpenHandles'",
     "test:front": "JEST_TEST_SUITE=front jest",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
-    "e2e": "firebase emulators:exec --only firestore --project e2e 'start-server-and-test start http://localhost:3000 cypress'",
-    "e2e:headless": "firebase emulators:exec --only firestore --project e2e 'start-server-and-test start http://localhost:3000 cypress:headless'"
+    "e2e": "firebase emulators:exec --only firestore --project e2e 'node ./scripts/start_app_and_run_cypress.js'"
   },
   "dependencies": {
     "firebase-admin": "^10.0.2",
@@ -41,7 +40,6 @@
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
-    "start-server-and-test": "^1.14.0",
     "typescript": "4.5.5"
   },
   "resolutions": {
