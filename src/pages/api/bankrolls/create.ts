@@ -1,11 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { CreateBankrollCommand } from '@/back/domain'
+import {
+  CommandViolation,
+  CreateBankrollCommand,
+  validateCreateBankrollCommand,
+} from '@/back/domain'
 import { handleCreateBankroll } from '@/back/application'
 import { bankrollRepository } from '@/back/infrastructure'
 
+type CreateBankrollResponse = {
+  violations: CommandViolation<CreateBankrollCommand>[]
+}
+
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<void>
+  res: NextApiResponse<CreateBankrollResponse>
 ): Promise<void> => {
   const { uuid, name, initialCapital, currency } = req.body
 
@@ -16,9 +24,19 @@ const handler = async (
     currency,
   }
 
+  const violations = validateCreateBankrollCommand(createBankrollCommand)
+
+  if (0 < violations.length) {
+    res.status(400).json({
+      violations,
+    })
+
+    return
+  }
+
   await handleCreateBankroll(bankrollRepository, createBankrollCommand)
 
-  res.send()
+  res.json({ violations: [] })
 }
 
 export default handler
