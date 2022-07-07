@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import Router from 'next/router'
+import { CreateBankrollCommand } from '@/back/domain'
 import { Title, Link, useNotify, generateUuid } from '@/front/shared'
 import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
@@ -7,7 +8,7 @@ const CreateBankroll: NextPage = () => {
   const notify = useNotify()
 
   const handleFormSubmitted = async (formValues: CreateBankrollFormValues) => {
-    const bankrollCommand = {
+    const command: CreateBankrollCommand = {
       uuid: generateUuid(),
       ...formValues,
     }
@@ -17,7 +18,7 @@ const CreateBankroll: NextPage = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(bankrollCommand),
+      body: JSON.stringify(command),
     })
 
     if (response.ok) {
