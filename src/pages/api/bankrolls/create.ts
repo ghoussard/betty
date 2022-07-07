@@ -1,25 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CreateBankrollCommand } from '@/back/domain'
 import { handleCreateBankroll } from '@/back/application'
-import { bankrollRepository, generateUuid } from '@/back/infrastructure'
+import { bankrollRepository } from '@/back/infrastructure'
 
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<void>
 ): Promise<void> => {
-  const { name, initialCapital, currency } = req.body
+  const { uuid, name, initialCapital, currency } = req.body
 
   const createBankrollCommand: CreateBankrollCommand = {
+    uuid,
     name,
     initialCapital,
     currency,
   }
 
-  await handleCreateBankroll(
-    bankrollRepository,
-    generateUuid,
-    createBankrollCommand
-  )
+  await handleCreateBankroll(bankrollRepository, createBankrollCommand)
 
   res.send()
 }

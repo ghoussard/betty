@@ -14,15 +14,14 @@ describe('handle create bankroll', () => {
       currency,
     }
 
-    const generateUuid = jest.fn().mockReturnValue(uuid)
-
     const bankrollRepository: BankrollRepository = {
       create: jest.fn(),
     }
 
     const bankrollRepositorySpy = jest.spyOn(bankrollRepository, 'create')
 
-    await handleCreateBankroll(bankrollRepository, generateUuid, {
+    await handleCreateBankroll(bankrollRepository, {
+      uuid,
       name,
       initialCapital,
       currency,

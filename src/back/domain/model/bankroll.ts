@@ -1,10 +1,8 @@
-type BankrollIdentifier = string
-
 type Bankroll = {
-  uuid: BankrollIdentifier
+  uuid: string
   name: string
   initialCapital: number
   currency: string
 }
 
-export type { Bankroll, BankrollIdentifier }
+export type { Bankroll }
