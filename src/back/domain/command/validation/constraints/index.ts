@@ -1,4 +1,5 @@
 export * from './common'
+export * from './greaterThanOrEqual'
 export * from './notBlank'
 export * from './required'
 export * from './uuid'
