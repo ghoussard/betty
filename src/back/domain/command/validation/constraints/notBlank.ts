@@ -1,34 +1,16 @@
-import { Constraint, UnexpectedConstraintError, Validate } from './common'
+import { Constraint, ValidationResult } from './common'
 
-const NOT_BLANK_CONSTRAINT_NAME = 'not_blank'
+class NotBlankConstraint implements Constraint {
+  validate(value: unknown): ValidationResult {
+    if ('string' === typeof value && 0 === value.length) {
+      return {
+        validated: false,
+        violationReason: 'This value must be filled',
+      }
+    }
 
-class NotBlankConstraint extends Constraint {
-  constructor() {
-    super(NOT_BLANK_CONSTRAINT_NAME)
-  }
-
-  public get violationReason(): string {
-    return 'This value must be filled'
+    return { validated: true }
   }
 }
 
-const validateNotBlank: Validate = (
-  constraint: Constraint,
-  value: unknown
-): string | null => {
-  if (!(constraint instanceof NotBlankConstraint)) {
-    throw new UnexpectedConstraintError()
-  }
-
-  if ('string' !== typeof value) {
-    return null
-  }
-
-  if (0 === value.length) {
-    return constraint.violationReason
-  }
-
-  return null
-}
-
-export { NOT_BLANK_CONSTRAINT_NAME, NotBlankConstraint, validateNotBlank }
+export { NotBlankConstraint }

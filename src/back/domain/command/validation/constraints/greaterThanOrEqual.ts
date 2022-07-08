@@ -1,45 +1,22 @@
-import { Constraint, UnexpectedConstraintError, Validate } from './common'
+import { Constraint, ValidationResult } from './common'
 
-const GREATER_THAN_OR_EQUAL_CONSTRAINT_NAME = 'greater_than_or_equal'
-
-class GreaterThanOrEqualConstraint extends Constraint {
+class GreaterThanOrEqualConstraint implements Constraint {
   private _min: number
 
   constructor(min: number) {
-    super(GREATER_THAN_OR_EQUAL_CONSTRAINT_NAME)
     this._min = min
   }
 
-  public get min(): number {
-    return this._min
-  }
+  public validate(value: unknown): ValidationResult {
+    if ('number' === typeof value && this._min > value) {
+      return {
+        validated: false,
+        violationReason: `This value must be greater or equal than ${this._min}`,
+      }
+    }
 
-  public get violationReason(): string {
-    return `This value must be greater or equal than ${this._min}`
+    return { validated: true }
   }
 }
 
-const validateGreaterThanOrEqual: Validate = (
-  constraint: Constraint,
-  value: unknown
-): string | null => {
-  if (!(constraint instanceof GreaterThanOrEqualConstraint)) {
-    throw new UnexpectedConstraintError()
-  }
-
-  if ('number' !== typeof value) {
-    return null
-  }
-
-  if (constraint.min > value) {
-    return constraint.violationReason
-  }
-
-  return null
-}
-
-export {
-  GREATER_THAN_OR_EQUAL_CONSTRAINT_NAME,
-  GreaterThanOrEqualConstraint,
-  validateGreaterThanOrEqual,
-}
+export { GreaterThanOrEqualConstraint }
