@@ -1,29 +1,48 @@
 import {
-  REQUIRED,
-  UUID,
+  REQUIRED_CONSTRAINT_NAME,
+  UUID_CONSTRAINT_NAME,
   validateRequired,
   validateUuid,
   Validate,
-  NOT_BLANK,
+  NOT_BLANK_CONSTRAINT_NAME,
   validateNotBlank,
+  Constraint,
 } from './constraints'
 
-const CONSTRAINTS = [REQUIRED, UUID, NOT_BLANK] as const
+const CONSTRAINT_NAMES = [
+  REQUIRED_CONSTRAINT_NAME,
+  UUID_CONSTRAINT_NAME,
+  NOT_BLANK_CONSTRAINT_NAME,
+]
 
-type Constraint = typeof CONSTRAINTS[number]
+type ConstraintName = typeof CONSTRAINT_NAMES[number]
 
 type ConstraintMapping = {
-  [constraint in Constraint]: Validate
+  [constraint in ConstraintName]: Validate
 }
 
 const CONSTRAINT_MAPPING: ConstraintMapping = {
-  [REQUIRED]: validateRequired,
-  [UUID]: validateUuid,
-  [NOT_BLANK]: validateNotBlank,
+  [REQUIRED_CONSTRAINT_NAME]: validateRequired,
+  [UUID_CONSTRAINT_NAME]: validateUuid,
+  [NOT_BLANK_CONSTRAINT_NAME]: validateNotBlank,
 }
 
-const validateValue = (constraint: Constraint, value: unknown): string | null =>
-  CONSTRAINT_MAPPING[constraint](value)
+const isValidConstraintName = (
+  constraintName: string
+): constraintName is ConstraintName => CONSTRAINT_NAMES.includes(constraintName)
+
+class UnhandledConstraintError extends Error {}
+
+const validateValue = (
+  constraint: Constraint,
+  value: unknown
+): string | null => {
+  if (!isValidConstraintName(constraint.name)) {
+    throw new UnhandledConstraintError()
+  }
+
+  return CONSTRAINT_MAPPING[constraint.name](constraint, value)
+}
 
 type CommandProperty<C> = keyof C
 

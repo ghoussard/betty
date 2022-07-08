@@ -1,7 +1,7 @@
 import {
   validateCommand,
-  REQUIRED,
-  UUID,
+  RequiredConstraint,
+  UuidConstraint,
   CommandConstraints,
 } from '@/back/domain/command/validation'
 
@@ -12,8 +12,8 @@ type DummyCommand = {
 }
 
 const dummyCommandConstraints: CommandConstraints<DummyCommand> = {
-  uuid: [REQUIRED, UUID],
-  name: [REQUIRED],
+  uuid: [new RequiredConstraint(), new UuidConstraint()],
+  name: [new RequiredConstraint()],
   phone: [],
 }
 

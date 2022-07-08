@@ -1,18 +1,34 @@
-import { Validate } from './common'
+import { Constraint, UnexpectedConstraintError, Validate } from './common'
 
-const NOT_BLANK = 'not_blank'
-const NOT_BLANK_REASON = 'This value must be filled'
+const NOT_BLANK_CONSTRAINT_NAME = 'not_blank'
 
-const validateNotBlank: Validate = (value: unknown): string | null => {
+class NotBlankConstraint extends Constraint {
+  constructor() {
+    super(NOT_BLANK_CONSTRAINT_NAME)
+  }
+
+  public get violationReason(): string {
+    return 'This value must be filled'
+  }
+}
+
+const validateNotBlank: Validate = (
+  constraint: Constraint,
+  value: unknown
+): string | null => {
+  if (!(constraint instanceof NotBlankConstraint)) {
+    throw new UnexpectedConstraintError()
+  }
+
   if ('string' !== typeof value) {
     return null
   }
 
   if (0 === value.length) {
-    return NOT_BLANK_REASON
+    return constraint.violationReason
   }
 
   return null
 }
 
-export { NOT_BLANK, validateNotBlank }
+export { NOT_BLANK_CONSTRAINT_NAME, NotBlankConstraint, validateNotBlank }
