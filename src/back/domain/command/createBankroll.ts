@@ -3,6 +3,7 @@ import {
   CommandViolation,
   NotBlankConstraint,
   RequiredConstraint,
+  TypeConstraint,
   UuidConstraint,
   GreaterThanOrEqualConstraint,
   validateCommand,
@@ -16,13 +17,22 @@ type CreateBankrollCommand = {
 }
 
 const constraints: CommandConstraints<CreateBankrollCommand> = {
-  uuid: [new RequiredConstraint(), new UuidConstraint()],
-  name: [new RequiredConstraint(), new NotBlankConstraint()],
+  uuid: [
+    new RequiredConstraint(),
+    new TypeConstraint('string'),
+    new UuidConstraint(),
+  ],
+  name: [
+    new RequiredConstraint(),
+    new TypeConstraint('string'),
+    new NotBlankConstraint(),
+  ],
   initialCapital: [
     new RequiredConstraint(),
+    new TypeConstraint('number'),
     new GreaterThanOrEqualConstraint(1),
   ],
-  currency: [new RequiredConstraint()],
+  currency: [new RequiredConstraint(), new TypeConstraint('string')],
 }
 
 const validateCreateBankrollCommand = (
