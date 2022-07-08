@@ -1,20 +1,14 @@
-abstract class Constraint {
-  private _name: string
+type ValidationResult =
+  | {
+      validated: true
+    }
+  | {
+      validated: false
+      violationReason: string
+    }
 
-  constructor(name: string) {
-    this._name = name
-  }
-
-  public get name(): string {
-    return this._name
-  }
-
-  abstract get violationReason(): string
+interface Constraint {
+  validate(value: unknown): ValidationResult
 }
 
-class UnexpectedConstraintError extends Error {}
-
-type Validate = (constraint: Constraint, value: unknown) => string | null
-
-export { Constraint, UnexpectedConstraintError }
-export type { Validate }
+export type { Constraint, ValidationResult }
