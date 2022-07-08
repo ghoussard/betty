@@ -32,7 +32,11 @@ const constraints: CommandConstraints<CreateBankrollCommand> = {
     new TypeConstraint('number'),
     new GreaterThanOrEqualConstraint(1),
   ],
-  currency: [new RequiredConstraint(), new TypeConstraint('string')],
+  currency: [
+    new RequiredConstraint(),
+    new TypeConstraint('string'),
+    new NotBlankConstraint(),
+  ],
 }
 
 const validateCreateBankrollCommand = (
