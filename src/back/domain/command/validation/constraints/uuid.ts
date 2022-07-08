@@ -7,7 +7,7 @@ class UuidConstraint implements Constraint {
     if ('string' === typeof value && !this._pattern.test(value)) {
       return {
         validated: false,
-        violationReason: 'This value is not a valid uuid',
+        violationReason: 'This value must be an uuid',
       }
     }
 

@@ -74,7 +74,7 @@ describe('validate command', () => {
     ).toStrictEqual([
       {
         property: 'uuid',
-        reason: 'This value is not a valid uuid',
+        reason: 'This value must be an uuid',
       },
       {
         property: 'name',
