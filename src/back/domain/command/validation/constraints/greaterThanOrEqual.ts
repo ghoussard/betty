@@ -11,7 +11,7 @@ class GreaterThanOrEqualConstraint implements Constraint {
     if ('number' === typeof value && this._min > value) {
       return {
         validated: false,
-        violationReason: `This value must be greater or equal than ${this._min}`,
+        violationReason: `This value must be greater than or equal ${this._min}`,
       }
     }
 
