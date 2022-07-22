@@ -3,7 +3,7 @@ import {
   CommandViolation,
   CreateBankrollCommand,
   validateCreateBankrollCommand,
-} from '@/back/domain'
+} from '@/shared/domain'
 import { handleCreateBankroll } from '@/back/application'
 import { bankrollRepository } from '@/back/infrastructure'
 
