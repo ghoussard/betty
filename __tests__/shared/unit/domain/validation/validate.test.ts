@@ -1,9 +1,9 @@
 import {
   RequiredConstraint,
   UuidConstraint,
-  ObjectConstraints,
+  Constraints,
 } from '@/shared/domain/validation'
-import { validateObject } from '@/shared/domain/validation/validateObject'
+import { validate } from '@/shared/domain/validation/validate'
 
 type DummyObject = {
   uuid: string
@@ -11,7 +11,7 @@ type DummyObject = {
   phone: string
 }
 
-const dummyObjectConstraints: ObjectConstraints<DummyObject> = {
+const dummyConstraints: Constraints<DummyObject> = {
   uuid: [new RequiredConstraint(), new UuidConstraint()],
   name: [new RequiredConstraint()],
   phone: [],
@@ -20,36 +20,36 @@ const dummyObjectConstraints: ObjectConstraints<DummyObject> = {
 describe('validate object', () => {
   test('it returns an empty array when object is valided', () => {
     expect(
-      validateObject(
+      validate(
         {
           uuid: '294bf65a-dfaf-4830-be0d-a44aa8220689',
           name: 'A name',
           phone: '',
         },
-        dummyObjectConstraints
+        dummyConstraints
       )
     ).toStrictEqual([])
 
     expect(
-      validateObject(
+      validate(
         // @ts-expect-error
         {
           uuid: '294bf65a-dfaf-4830-be0d-a44aa8220689',
           name: 'A name',
         },
-        dummyObjectConstraints
+        dummyConstraints
       )
     ).toStrictEqual([])
   })
 
   test('it returns violations when object is invalided', () => {
     expect(
-      validateObject(
+      validate(
         // @ts-expect-error
         {
           phone: '',
         },
-        dummyObjectConstraints
+        dummyConstraints
       )
     ).toStrictEqual([
       {
@@ -63,13 +63,13 @@ describe('validate object', () => {
     ])
 
     expect(
-      validateObject(
+      validate(
         // @ts-expect-error
         {
           uuid: 'an-invalid-uuid',
           phone: '',
         },
-        dummyObjectConstraints
+        dummyConstraints
       )
     ).toStrictEqual([
       {

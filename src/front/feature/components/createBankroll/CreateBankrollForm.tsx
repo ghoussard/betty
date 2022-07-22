@@ -1,5 +1,13 @@
 import { FormEvent, useState } from 'react'
-import { Button, Field, Label, NumberInput, TextInput } from '@/front/shared'
+import { Violation } from '@/shared/domain'
+import {
+  Button,
+  Field,
+  Label,
+  NumberInput,
+  TextInput,
+  getViolationReason,
+} from '@/front/shared'
 import styled from 'styled-components'
 
 const Container = styled.form`
@@ -17,9 +25,13 @@ type CreateBankrollFormValues = {
 
 type CreateBankrollFormProps = {
   onSubmit: (values: CreateBankrollFormValues) => void
+  violations: Violation<CreateBankrollFormValues>[]
 }
 
-const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
+const CreateBankrollForm = ({
+  onSubmit,
+  violations,
+}: CreateBankrollFormProps) => {
   const [formValues, setFormValues] = useState<CreateBankrollFormValues>({
     name: '',
     initialCapital: 0,
@@ -38,6 +50,7 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
         <TextInput
           value={formValues.name}
           onChange={(name) => setFormValues({ ...formValues, name })}
+          error={getViolationReason(violations, 'name')}
         />
       </Field>
       <Field name="initalCapital">
@@ -47,6 +60,7 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
           onChange={(initialCapital) =>
             setFormValues({ ...formValues, initialCapital })
           }
+          error={getViolationReason(violations, 'initialCapital')}
         />
       </Field>
       <Field name="currency">
@@ -54,6 +68,7 @@ const CreateBankrollForm = ({ onSubmit }: CreateBankrollFormProps) => {
         <TextInput
           value={formValues.currency}
           onChange={(currency) => setFormValues({ ...formValues, currency })}
+          error={getViolationReason(violations, 'currency')}
         />
       </Field>
       <Button onClick={handleSubmit}>Create</Button>

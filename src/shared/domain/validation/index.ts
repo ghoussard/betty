@@ -1,2 +1,2 @@
 export * from './constraints'
-export * from './validateObject'
+export * from './validate'
