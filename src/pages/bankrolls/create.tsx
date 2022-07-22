@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import Router from 'next/router'
-import { CreateBankrollCommand } from '@/back/domain'
+import { CreateBankrollCommand } from '@/shared/domain'
 import { Title, Link, useNotify, generateUuid } from '@/front/shared'
 import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
@@ -24,6 +24,8 @@ const CreateBankroll: NextPage = () => {
     if (response.ok) {
       Router.push('/')
       notify({ level: 'success', message: 'Bankroll sucessfully created' })
+    } else {
+      notify({ level: 'error', message: 'Unable to create a bankroll' })
     }
   }
 
