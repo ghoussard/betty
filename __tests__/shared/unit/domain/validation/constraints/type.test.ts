@@ -1,5 +1,5 @@
-import { ValidationResult } from '@/back/domain'
-import { TypeConstraint } from '@/back/domain/command/validation/constraints/type'
+import { ValidationResult } from '@/shared/domain'
+import { TypeConstraint } from '@/shared/domain/validation/constraints/type'
 
 const stringConstraint = new TypeConstraint('string')
 const numberConstraint = new TypeConstraint('number')

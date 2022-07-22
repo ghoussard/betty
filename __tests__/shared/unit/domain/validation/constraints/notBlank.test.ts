@@ -1,5 +1,5 @@
-import { ValidationResult } from '@/back/domain'
-import { NotBlankConstraint } from '@/back/domain/command/validation/constraints/notBlank'
+import { ValidationResult } from '@/shared/domain'
+import { NotBlankConstraint } from '@/shared/domain/validation/constraints/notBlank'
 
 const constraint = new NotBlankConstraint()
 const validatedResult: ValidationResult = { validated: true }

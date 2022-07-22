@@ -9,6 +9,7 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/back/(.*)$': '<rootDir>/src/back/$1',
     '^@/front/(.*)$': '<rootDir>/src/front/$1',
+    '^@/shared/(.*)$': '<rootDir>/src/shared/$1',
   },
   testMatch: [
     '<rootDir>/__tests__/**/*.test.ts',
@@ -17,6 +18,12 @@ const customJestConfig = {
 
 let configOverrides = {}
 switch (env.JEST_TEST_SUITE) {
+  case 'shared':
+    configOverrides = {
+      testEnvironment: 'node',
+      testMatch: ['<rootDir>/__tests__/shared/**/*.test.ts'],
+    }
+    break
   case 'back:unit':
     configOverrides = {
       testEnvironment: 'node',

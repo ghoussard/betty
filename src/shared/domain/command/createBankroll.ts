@@ -7,7 +7,7 @@ import {
   UuidConstraint,
   GreaterThanOrEqualConstraint,
   validateCommand,
-} from './validation'
+} from '../validation'
 
 type CreateBankrollCommand = {
   uuid: string

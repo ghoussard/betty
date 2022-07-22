@@ -9,6 +9,7 @@
     "lint:fix": "next lint --dir src --fix",
     "prettier": "prettier --config .prettierrc.json --check src cypress __tests__ jest scripts",
     "prettier:fix": "prettier --config .prettierrc.json --write src cypress __tests__ jest scripts",
+    "test:shared": "JEST_TEST_SUITE=shared jest",
     "test:back:unit": "JEST_TEST_SUITE=back:unit jest",
     "test:back:integration": "firebase emulators:exec --only firestore --project test 'JEST_TEST_SUITE=back:integration jest --detectOpenHandles'",
     "test:front": "JEST_TEST_SUITE=front jest",
