@@ -1,6 +1,11 @@
-import { Container, InputProps } from './common'
+import { Error } from '../'
+import { InputProps, Input } from './common'
 
-const NumberInput = ({ onChange, ...props }: InputProps<number>) => {
+const NumberInput = ({
+  onChange,
+  error = null,
+  ...props
+}: InputProps<number>) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       const value = parseInt(e.target.value || '0', 10)
@@ -8,7 +13,17 @@ const NumberInput = ({ onChange, ...props }: InputProps<number>) => {
     }
   }
 
-  return <Container type="number" onChange={handleChange} {...props} />
+  return (
+    <>
+      <Input
+        type="number"
+        onChange={handleChange}
+        hasError={null !== error}
+        {...props}
+      />
+      {error && <Error>{error}</Error>}
+    </>
+  )
 }
 
 export { NumberInput }

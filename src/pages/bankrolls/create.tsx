@@ -1,11 +1,15 @@
+import { useState } from 'react'
 import { NextPage } from 'next'
 import Router from 'next/router'
-import { CreateBankrollCommand } from '@/shared/domain'
+import { CreateBankrollCommand, Violation } from '@/shared/domain'
 import { Title, Link, useNotify, generateUuid } from '@/front/shared'
 import { CreateBankrollForm, CreateBankrollFormValues } from '@/front/feature'
 
 const CreateBankroll: NextPage = () => {
   const notify = useNotify()
+  const [violations, setViolations] = useState<
+    Violation<CreateBankrollFormValues>[]
+  >([])
 
   const handleFormSubmitted = async (formValues: CreateBankrollFormValues) => {
     const command: CreateBankrollCommand = {
@@ -23,8 +27,12 @@ const CreateBankroll: NextPage = () => {
 
     if (response.ok) {
       Router.push('/')
+
       notify({ level: 'success', message: 'Bankroll sucessfully created' })
     } else {
+      const { violations } = await response.json()
+      setViolations(violations)
+
       notify({ level: 'error', message: 'Unable to create a bankroll' })
     }
   }
@@ -33,7 +41,10 @@ const CreateBankroll: NextPage = () => {
     <>
       <Title>Create bankroll</Title>
       <Link href="/bankrolls">Go back</Link>
-      <CreateBankrollForm onSubmit={handleFormSubmitted} />
+      <CreateBankrollForm
+        onSubmit={handleFormSubmitted}
+        violations={violations}
+      />
     </>
   )
 }

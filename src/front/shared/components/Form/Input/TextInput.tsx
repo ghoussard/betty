@@ -1,13 +1,28 @@
-import { Container, InputProps } from './common'
+import { Error } from '../'
+import { Input, InputProps } from './common'
 
-const TextInput = ({ onChange, ...props }: InputProps<string>) => {
+const TextInput = ({
+  onChange,
+  error = null,
+  ...props
+}: InputProps<string>) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(e.target.value)
     }
   }
 
-  return <Container type="text" onChange={handleChange} {...props} />
+  return (
+    <>
+      <Input
+        type="text"
+        onChange={handleChange}
+        hasError={null !== error}
+        {...props}
+      />
+      {error && <Error>{error}</Error>}
+    </>
+  )
 }
 
 export { TextInput }

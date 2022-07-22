@@ -5,27 +5,24 @@ const validateProperty = (
   value: unknown
 ): ValidationResult => constraint.validate(value)
 
-type ObjectProperty<O> = keyof O
+type Property<V> = keyof V
 
-type ObjectConstraints<O> = {
-  [property in ObjectProperty<O>]: Constraint[]
+type Constraints<V> = {
+  [property in Property<V>]: Constraint[]
 }
 
-type ObjectViolation<O> = {
-  property: ObjectProperty<O>
+type Violation<V> = {
+  property: Property<V>
   reason: string
 }
 
-const validateObject = <O>(
-  object: O,
-  constraints: ObjectConstraints<O>
-): ObjectViolation<O>[] => {
-  const violations: ObjectViolation<O>[] = []
+const validate = <V>(value: V, constraints: Constraints<V>): Violation<V>[] => {
+  const violations: Violation<V>[] = []
 
   for (const property in constraints) {
     const propertyConstraints = constraints[property]
     for (const constraint of propertyConstraints) {
-      const validation = validateProperty(constraint, object[property])
+      const validation = validateProperty(constraint, value[property])
 
       if (!validation.validated) {
         violations.push({
@@ -40,5 +37,5 @@ const validateObject = <O>(
   return violations
 }
 
-export type { ObjectConstraints, ObjectViolation }
-export { validateObject }
+export type { Constraints, Violation }
+export { validate }

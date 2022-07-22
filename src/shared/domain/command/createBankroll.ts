@@ -1,12 +1,12 @@
 import {
-  ObjectConstraints,
-  ObjectViolation,
+  Constraints,
+  Violation,
   NotBlankConstraint,
   RequiredConstraint,
   TypeConstraint,
   UuidConstraint,
   GreaterThanOrEqualConstraint,
-  validateObject,
+  validate,
 } from '../validation'
 
 type CreateBankrollCommand = {
@@ -16,7 +16,7 @@ type CreateBankrollCommand = {
   currency: string
 }
 
-const constraints: ObjectConstraints<CreateBankrollCommand> = {
+const constraints: Constraints<CreateBankrollCommand> = {
   uuid: [
     new RequiredConstraint(),
     new TypeConstraint('string'),
@@ -41,8 +41,7 @@ const constraints: ObjectConstraints<CreateBankrollCommand> = {
 
 const validateCreateBankrollCommand = (
   command: CreateBankrollCommand
-): ObjectViolation<CreateBankrollCommand>[] =>
-  validateObject(command, constraints)
+): Violation<CreateBankrollCommand>[] => validate(command, constraints)
 
 export type { CreateBankrollCommand }
 export { validateCreateBankrollCommand }
