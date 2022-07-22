@@ -1,8 +1,5 @@
-import {
-  Bankroll,
-  BankrollRepository,
-  CreateBankrollCommand,
-} from '@/back/domain'
+import { CreateBankrollCommand } from '@/shared/domain'
+import { Bankroll, BankrollRepository } from '@/back/domain'
 
 const handleCreateBankroll = async (
   { create }: BankrollRepository,

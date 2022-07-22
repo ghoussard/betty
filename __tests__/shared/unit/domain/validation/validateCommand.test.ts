@@ -3,7 +3,7 @@ import {
   RequiredConstraint,
   UuidConstraint,
   CommandConstraints,
-} from '@/back/domain/command/validation'
+} from '@/shared/domain/validation'
 
 type DummyCommand = {
   uuid: string

@@ -1,5 +1,5 @@
-import { ValidationResult } from '@/back/domain'
-import { RequiredConstraint } from '@/back/domain/command/validation/constraints/required'
+import { ValidationResult } from '@/shared/domain'
+import { RequiredConstraint } from '@/shared/domain/validation/constraints/required'
 
 const constraint = new RequiredConstraint()
 const validatedResult: ValidationResult = { validated: true }

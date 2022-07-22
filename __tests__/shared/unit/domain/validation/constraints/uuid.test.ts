@@ -1,5 +1,5 @@
-import { ValidationResult } from '@/back/domain'
-import { UuidConstraint } from '@/back/domain/command/validation/constraints/uuid'
+import { ValidationResult } from '@/shared/domain'
+import { UuidConstraint } from '@/shared/domain/validation/constraints/uuid'
 
 const constraint = new UuidConstraint()
 const validatedResult: ValidationResult = { validated: true }

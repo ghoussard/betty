@@ -1,5 +1,5 @@
-import { ValidationResult } from '@/back/domain'
-import { GreaterThanOrEqualConstraint } from '@/back/domain/command/validation/constraints/greaterThanOrEqual'
+import { ValidationResult } from '@/shared/domain'
+import { GreaterThanOrEqualConstraint } from '@/shared/domain/validation/constraints/greaterThanOrEqual'
 
 const constraint = new GreaterThanOrEqualConstraint(1)
 const validatedResult: ValidationResult = { validated: true }

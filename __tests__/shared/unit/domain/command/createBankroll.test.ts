@@ -1,4 +1,4 @@
-import { validateCreateBankrollCommand } from '@/back/domain/command/createBankroll'
+import { validateCreateBankrollCommand } from '@/shared/domain/command/createBankroll'
 
 describe('Create bankroll command', () => {
   test('it validates valid bankroll command', () => {

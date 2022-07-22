@@ -19,6 +19,7 @@
       "@/back/*": ["src/back/*"],
       "@/front/*": ["src/front/*"],
       "@/pages/*": ["src/pages/*"],
+      "@/shared/*": ["src/shared/*"],
       "@/styles/*": ["src/styles/*"],
     },
   },
