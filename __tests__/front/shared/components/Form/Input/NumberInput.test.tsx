@@ -16,4 +16,9 @@ describe('NumberInput component', () => {
     render(<NumberInput data-testid="testInput" className="test-class" />)
     expect(screen.getByTestId('testInput')).toHaveClass('test-class')
   })
+
+  test('it displays error', () => {
+    render(<NumberInput onChange={jest.fn()} error="an error" />)
+    expect(screen.getByText('an error')).toBeInTheDocument()
+  })
 })

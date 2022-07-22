@@ -1,11 +1,15 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { CreateBankrollForm } from '@/front/feature/components/createBankroll/CreateBankrollForm'
+import { Violation } from '@/shared/domain'
+import {
+  CreateBankrollForm,
+  CreateBankrollFormValues,
+} from '@/front/feature/components/createBankroll/CreateBankrollForm'
 
 describe('CreateBankrollForm component', () => {
   test('it triggers onSubmit callback when it is submitted', () => {
     const onSubmit = jest.fn()
 
-    render(<CreateBankrollForm onSubmit={onSubmit} />)
+    render(<CreateBankrollForm onSubmit={onSubmit} violations={[]} />)
 
     const nameInput = screen.getByLabelText('Name')
     fireEvent.change(nameInput, { target: { value: 'Betty' } })
@@ -24,5 +28,28 @@ describe('CreateBankrollForm component', () => {
       initialCapital: 1,
       currency: 'EUR',
     })
+  })
+
+  test('it displays violations', () => {
+    const violations: Violation<CreateBankrollFormValues>[] = [
+      {
+        property: 'name',
+        reason: 'name violation',
+      },
+      {
+        property: 'initialCapital',
+        reason: 'initialCapital violation',
+      },
+      {
+        property: 'currency',
+        reason: 'currency violation',
+      },
+    ]
+
+    render(<CreateBankrollForm onSubmit={jest.fn()} violations={violations} />)
+
+    expect(screen.getByText('name violation')).toBeInTheDocument()
+    expect(screen.getByText('initialCapital violation')).toBeInTheDocument()
+    expect(screen.getByText('currency violation')).toBeInTheDocument()
   })
 })
