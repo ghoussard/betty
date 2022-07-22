@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {
-  CommandViolation,
+  ObjectViolation,
   CreateBankrollCommand,
   validateCreateBankrollCommand,
 } from '@/shared/domain'
@@ -8,7 +8,7 @@ import { handleCreateBankroll } from '@/back/application'
 import { bankrollRepository } from '@/back/infrastructure'
 
 type CreateBankrollResponse = {
-  violations: CommandViolation<CreateBankrollCommand>[]
+  violations: ObjectViolation<CreateBankrollCommand>[]
 }
 
 const handler = async (

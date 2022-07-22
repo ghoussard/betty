@@ -1,55 +1,55 @@
 import {
-  validateCommand,
   RequiredConstraint,
   UuidConstraint,
-  CommandConstraints,
+  ObjectConstraints,
 } from '@/shared/domain/validation'
+import { validateObject } from '@/shared/domain/validation/validateObject'
 
-type DummyCommand = {
+type DummyObject = {
   uuid: string
   name: string
   phone: string
 }
 
-const dummyCommandConstraints: CommandConstraints<DummyCommand> = {
+const dummyObjectConstraints: ObjectConstraints<DummyObject> = {
   uuid: [new RequiredConstraint(), new UuidConstraint()],
   name: [new RequiredConstraint()],
   phone: [],
 }
 
-describe('validate command', () => {
-  test('it returns an empty array when command is valided', () => {
+describe('validate object', () => {
+  test('it returns an empty array when object is valided', () => {
     expect(
-      validateCommand(
+      validateObject(
         {
           uuid: '294bf65a-dfaf-4830-be0d-a44aa8220689',
           name: 'A name',
           phone: '',
         },
-        dummyCommandConstraints
+        dummyObjectConstraints
       )
     ).toStrictEqual([])
 
     expect(
-      validateCommand(
+      validateObject(
         // @ts-expect-error
         {
           uuid: '294bf65a-dfaf-4830-be0d-a44aa8220689',
           name: 'A name',
         },
-        dummyCommandConstraints
+        dummyObjectConstraints
       )
     ).toStrictEqual([])
   })
 
-  test('it returns violations when command is invalided', () => {
+  test('it returns violations when object is invalided', () => {
     expect(
-      validateCommand(
+      validateObject(
         // @ts-expect-error
         {
           phone: '',
         },
-        dummyCommandConstraints
+        dummyObjectConstraints
       )
     ).toStrictEqual([
       {
@@ -63,13 +63,13 @@ describe('validate command', () => {
     ])
 
     expect(
-      validateCommand(
+      validateObject(
         // @ts-expect-error
         {
           uuid: 'an-invalid-uuid',
           phone: '',
         },
-        dummyCommandConstraints
+        dummyObjectConstraints
       )
     ).toStrictEqual([
       {
