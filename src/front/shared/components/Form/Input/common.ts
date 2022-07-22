@@ -34,4 +34,4 @@ const Input = styled.input<
 `
 
 export type { InputProps }
-export { Input }
+export { Input, getInputColor }
