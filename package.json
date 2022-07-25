@@ -5,6 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "cruise": "depcruise --config .dependency-cruiser.js src",
     "lint": "next lint --dir src",
     "lint:fix": "next lint --dir src --fix",
     "prettier": "prettier --config .prettierrc.json --check src cypress __tests__ jest scripts",
