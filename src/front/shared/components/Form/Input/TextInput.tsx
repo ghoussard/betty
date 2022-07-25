@@ -1,4 +1,4 @@
-import { Error } from '../'
+import { Error } from '../Error'
 import { Input, InputProps } from './common'
 
 const TextInput = ({

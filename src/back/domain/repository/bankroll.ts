@@ -1,4 +1,4 @@
-import { Bankroll } from '@/back/domain'
+import { Bankroll } from '../model/bankroll'
 
 type BankrollRepository = {
   create: (bankroll: Bankroll) => Promise<void>

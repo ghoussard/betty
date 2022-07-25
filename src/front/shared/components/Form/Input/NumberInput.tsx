@@ -1,4 +1,4 @@
-import { Error } from '../'
+import { Error } from '../Error'
 import { InputProps, Input } from './common'
 
 const NumberInput = ({
