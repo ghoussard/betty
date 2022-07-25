@@ -34,6 +34,9 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
+    - name: Run dependency cruiser
+      run: yarn depcruise --config .dependency-cruiser.js src
+
     - name: Run lint
       run: yarn lint
 
